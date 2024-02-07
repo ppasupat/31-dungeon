@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>31 Dungeon</title>
+  <link href="https://fonts.googleapis.com/css2?family=Mali:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="npc.css">
+  <link rel="stylesheet" type="text/css" href="img/sheet.css">
+  <script type="text/javascript" src="jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="data.js"></script>
+  <script type="text/javascript" src="main.js"></script>
+</head>
+</head>
+<body>
+  <div id=game-wrapper>
+    <div id=game>
+      <div id=scene-main class=scene>
+        <div id=map-pane>
+          <div id=map>
+          </div>
+          <div id=arrow-n class=arrow data-dir=n></div>
+          <div id=arrow-w class=arrow data-dir=w></div>
+          <div id=arrow-e class=arrow data-dir=e></div>
+          <div id=arrow-s class=arrow data-dir=s></div>
+          <div id=encounter class=hidden>
+            <div id=npc-pic-wrapper class=centerize><div id=npc-pic></div></div>
+            <div id=npc-name-wrapper class=leftize><div id=npc-name></div></div>
+            <div id=npc-dialog-wrapper class=centerize><div id=npc-dialog></div></div>
+            <div id=btn-action-wrapper class=centerize><div id=btn-action></div></div>
+            <div id=btn-item-wrapper class=centerize><div id=btn-item></div></div>
+            <div id=btn-leave-wrapper class=centerize><div id=btn-leave>X</div></div>
+          </div>
+        </div>
+        <div id=hud-pane>
+          <div id=minimap-wrapper>
+            <svg id=minimap width=180 height=125>
+              <g id=minimap-edges></g>
+              <g id=minimap-nodes></g>
+              <g id=minimap-avatars></g>
+            </svg>
+          </div>
+          <div id=inventory>
+            <div class=item data-iid=""><div class=isp></div></div>
+            <div class=item data-iid=""><div class=isp></div></div>
+            <div class=item data-iid=""><div class=isp></div></div>
+            <div class=item data-iid=""><div class=isp></div></div>
+            <div class=item data-iid="oil"><div class="isp item-oil"></div></div>
+            <div class=item data-iid=""><div class=isp></div></div>
+          </div>
+        </div>
+      </div>
+      <div id=scene-preload class=scene>
+        <div class=centerize>
+          <div id=pane-loading>Loading ...</div>
+        </div>
+      </div>
+      <div id=scene-cover class="scene hidden"></div>
+    </div>
+    <div id=cheats>
+      <button type=button id=skipA>skip A</button>
+      <button type=button id=skipB>skip B</button>
+      <button type=button id=skipI>skip I</button>
+      <button type=button id=skipC>skip C</button>
+    </div>
+  </div>
+</body>
