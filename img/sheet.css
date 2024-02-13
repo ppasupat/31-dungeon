@@ -1,0 +1,8 @@
+.npc-fairy-0, .map-fairy > .msp {
+  background-position: -2px -2px;
+  width: 235px; height: 287px;
+}
+.npc-fairy-1, .map-fairy.map-fairy-1 > .msp {
+  background-position: -239px -2px;
+  width: 235px; height: 287px;
+}

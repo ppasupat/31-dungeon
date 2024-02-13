@@ -297,7 +297,7 @@ $(function () {
       if (savedData !== undefined) {
         loadGame(savedData);
       } else {
-        moveMap('a1');
+        moveMap('f0');
       }
       $('#scene-cover').addClass('hidden');
       saveGame();

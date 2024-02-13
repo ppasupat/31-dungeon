@@ -1,0 +1,239 @@
+/* ################################ */
+/* NPC on the map */
+
+.map-npc {
+  font-size: 150%; color: cyan; text-shadow: 2px 2px black, -2px -2px black; /* temp */
+}
+.map-npc.gone, .map-cake {
+  display: none;
+}
+.map-npc > .msp {
+  background-image: url('img/sheet.png');
+  position: absolute; top: 0; left: 0;
+  transform-origin: top left;
+}
+
+.map-fairy {
+  top: 1336px;
+  left: 220px;
+}
+.map-fairy > .msp {
+  transform: scale(0.5);
+}
+
+.map-door {
+  top: 1033px;
+  left: 423px;
+}
+.map-door > .msp {
+  transform: scale(0.4);
+}
+.map-door > #exclaim {
+  top: 20px;
+}
+
+.map-pond {
+  top: 858px;
+  left: 131px;
+}
+.map-pond > .msp {
+  transform: scale(0.4);
+}
+.map-pond > #exclaim {
+  top: 20px;
+  left: -60px;
+  top: -40px;
+}
+
+.map-cat {
+  top: 903px;
+  left: 814px;
+}
+.map-cat > .msp {
+  transform: scale(0.7);
+}
+
+.map-shop {
+  top: 810px;
+  left: 1135px;
+}
+.map-shop > .msp {
+  transform: scale(0.6);
+}
+.map-shop > #exclaim {
+  left: -40px;
+  top: 40px;
+}
+
+.map-noBridgeB {
+  top: 825px;
+  left: 1090px; 
+}
+.map-bridgeB {
+  top: 568px;
+  left: 977px;
+  display: none;
+}
+.map-bridgeB.appear {
+  display: block;
+}
+.map-noBridgeC {
+  top: 825px;
+  left: 1252px; 
+}
+.map-bridgeC {
+  top: 940px;
+  left: 1296px;
+  display: none;
+}
+.map-bridgeC.appear {
+  display: block;
+}
+
+.map-midboss {
+  top: 343px;
+  left: 883px; 
+}
+.map-midboss > .msp {
+  transform: scale(0.5);
+}
+
+.map-fire {
+  top: 305px;
+  left: 200px;
+}
+.map-fire > .msp {
+  transform: scale(0.5);
+}
+.map-fire-2 > #exclaim {
+  display: none;
+}
+
+.map-receptionist {
+  top: 322px;
+  left: 510px;
+}
+.map-receptionist > .msp {
+  transform: scale(0.5);
+}
+.map-receptionist-4 > #exclaim {
+  display: none;
+}
+
+.map-nurse {
+  top: 600px;
+  left: 380px;
+}
+.map-nurse > .msp {
+  transform: scale(0.5);
+}
+.map-nurse > #exclaim {
+  left: -60px;
+}
+
+.map-blacksmith {
+  top: 552px;
+  left: 1360px;
+}
+.map-blacksmith > .msp {
+  transform: scale(0.55);
+}
+.map-blacksmith > #exclaim {
+  left: -30px;
+}
+
+.map-restceptionist {
+  top: 316px;
+  left: 1800px;
+}
+.map-restceptionist > .msp {
+  transform: scale(0.5);
+}
+.map-restceptionist > #exclaim {
+  left: -50px;
+  top: 40px;
+}
+
+.map-lake {
+  top: 50px;
+  left: 1250px;
+}
+.map-lake > .msp {
+  transform: scale(0.4);
+}
+.map-lake > #exclaim {
+  top: 20px;
+  left: -60px;
+  top: -40px;
+}
+
+.map-stone {
+  top: 1480px;
+  left: 1210px;
+}
+.map-stone > .msp {
+  transform: scale(0.5);
+}
+.map-stone > #exclaim {
+  left: -60px;
+}
+.map-stone-2 > #exclaim {
+  display: none;
+}
+
+.map-shackle {
+  top: 1380px;
+  left: 1510px; 
+}
+.map-shackle > .msp {
+  transform: scale(0.55);
+}
+.map-shackle > #exclaim {
+  left: -50px;
+}
+
+.map-boss {
+  top: 1430px;
+  left: 1890px;
+}
+.map-boss > .msp {
+  transform: scale(0.7);
+}
+
+/* ################################ */
+/* NPC encounter */
+
+@keyframes bossShake {
+  0% { transform: translate(-3px, 0); }
+  50% { transform: translate(3px, 0); }
+  100% { transform: translate(-3px, 0); }
+}
+#npc-pic.npc-boss-1 {
+  animation: bossShake 0.1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+/* ################################ */
+/* Items */
+
+.item > .isp {
+  background-image: url('img/items.png');
+  position: absolute; top: 0; left: 0; width: 170px; height: 160px;
+  transform-origin: top left;
+  transform: scale(0.5);
+}
+.item-oil { background-position: 0 0; }
+.item-ice { background-position: -170px 0; }
+.item-money { background-position: -340px 0; }
+.item-rod { background-position: -510px 0; }
+.item-fish { background-position: -680px 0; }
+.item-grilledfish { background-position: -850px 0; }
+.item-key { background-position: -1020px 0; }
+.item-entkit { background-position: -1190px 0; }
+.item-sword { background-position: -1360px 0; }
+.item-gem { background-position: -1530px 0; }
+.item-powersword { background-position: -1700px 0; }
+.item[data-iid=""] > .isp {
+  background: none;
+}
