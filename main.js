@@ -1,7 +1,7 @@
 $(function () {
   'use strict';
 
-  const MAP_ROW_HEIGHT = 256, MAP_COL_WIDTH = 160,
+  const MAP_ROW_HEIGHT = 400, MAP_COL_WIDTH = 500,
     MAP_TOP_OFFSET = 0, MAP_LEFT_OFFSET = 0,
     MAP_PANE_HEIGHT = 400, MAP_PANE_WIDTH = 500;
 
@@ -58,57 +58,10 @@ $(function () {
   // ################################
   // Minimap
 
-  const MINIMAP_ROW_HEIGHT = 20, MINIMAP_COL_WIDTH = 15,
-    MINIMAP_TOP_OFFSET = 12, MINIMAP_LEFT_OFFSET = 15,
-    YELLOW = '#fea';
-
-  function getMiniMapCoords(pid) {
-    return {
-      x: MINIMAP_LEFT_OFFSET + MAP_DATA[pid].col * MINIMAP_COL_WIDTH,
-      y: MINIMAP_TOP_OFFSET + MAP_DATA[pid].row * MINIMAP_ROW_HEIGHT,
-    };
-  }
-
-  // Generate a tag in SVG namespace
-  function S(tag, attr) {
-    return $(document.createElementNS(
-      "http://www.w3.org/2000/svg", tag.replace(/[<>]/g, '')))
-      .attr(attr || {});
-  }
-
   function setupMinimap() {
-    S('circle', {
-      id: 'mm-player',
-      r: 7,
-      fill: 'none',
-      stroke: '#f55',
-      'stroke-width': 4,
-    }).appendTo('#minimap-avatars');
-    Object.keys(MAP_DATA).forEach(pid => {
-      let coords = getMiniMapCoords(pid);
-      S('circle', {
-        cx: coords.x, cy: coords.y,
-        r: 5,
-        fill: ((MAP_DATA[pid].customColors || {})['x'] || YELLOW),
-      }).appendTo('#minimap-nodes').addClass('mm-' + pid).hide();
-      Object.keys(MAP_DATA[pid].arrows).forEach(d => {
-        if (d === 'nw' || d === 'sw' || d === 'w') return;
-        let tgt = MAP_DATA[pid].arrows[d], tgtCoords = getMiniMapCoords(tgt);
-        S('line', {
-          x1: coords.x, y1: coords.y,
-          x2: tgtCoords.x, y2: tgtCoords.y,
-          'stroke-width': 2,
-          stroke: ((MAP_DATA[pid].customColors || {})[d] || YELLOW),
-        }).appendTo('#minimap-edges')
-          .addClass('mm-' + pid).addClass('mm-' + tgt).hide();
-      });
-    });
   }
 
   function visitMinimap(pid) {
-    $('.mm-' + pid).show();
-    let coords = getMiniMapCoords(pid);
-    $('#mm-player').attr({cx: coords.x, cy: coords.y});
   }
 
   // ################################
@@ -293,18 +246,16 @@ $(function () {
     $('.scene').hide();
     $('#scene-cover').show().removeClass('hidden');
     $('#scene-main').show();
-    setTimeout(() => {
-      if (savedData !== undefined) {
-        loadGame(savedData);
-      } else {
-        moveMap('f0');
-      }
-      $('#scene-cover').addClass('hidden');
-      saveGame();
-    }, 1);
+    if (savedData !== undefined) {
+      loadGame(savedData);
+    } else {
+      moveMap('f0');
+    }
+    $('#scene-cover').addClass('hidden');
+    saveGame();
   }
 
-  const APP_NAME = '29-steps';
+  const APP_NAME = '31-dungeon';
 
   function saveGame() {
     let data = {flags: flags, items: getAllItems(), pid: currentPid};
@@ -352,82 +303,6 @@ $(function () {
     },
     items: ['rod', 'key', '', '', 'oil', ''],
     pid: 'a4',
-  }));
-  $('#skipB').click(() => loadGame({
-    flags: {
-      "gotMoneyFromFairy": 1,
-      "tutorialDone2": 1,
-      "tutorialDone1": 1,
-      "pondFished": 1,
-      "catFed": 1,
-      "doorOpen": 1,
-      "feePaid": 1,
-      "nurseHelped": 1,
-      "midbossCleaned": 1,
-      "visited": {
-        "a1": 1, "a2": 1, "a3": 1, "a4": 1, "a5": 1, "a6": 1, "a7": 1, "s": 1,
-        "b1": 1, "b2": 1, "b3": 1, "b4": 1, "b5": 1, "b6": 1, "b7": 1, "b8": 1,
-      },
-    },
-    items: ['money', '', '', '', 'oil', ''],
-    pid: "b3",
-  }));
-  $('#skipI').click(() => loadGame({
-    flags: {
-      "gotMoneyFromFairy": 1,
-      "tutorialDone2": 1,
-      "tutorialDone1": 1,
-      "pondFished": 1,
-      "catFed": 1,
-      "doorOpen": 1,
-      "feePaid": 1,
-      "nurseHelped": 1,
-      "midbossCleaned": 1,
-      "midbossDefeated": 1,
-      "moneyStolen": 1,
-      "stoneOiled": 1,
-      "swordPulled": 1,
-      "lakeFished": 1,
-      "iceEscaped": 1,
-      "visited": {
-        "a1": 1, "a2": 1, "a3": 1, "a4": 1, "a5": 1, "a6": 1, "a7": 1, "s": 1,
-        "b1": 1, "b2": 1, "b3": 1, "b4": 1, "b5": 1, "b6": 1, "b7": 1, "b8": 1,
-        "c1": 1, "c2": 1, "c3": 1, "c4": 1, "c5": 1, "c6": 1, "c7": 1, "c8": 1, "c9": 1,
-        "d1": 1, "d2": 1, "d3": 1, "d4": 1,
-      },
-    },
-    items: ['rod', 'sword', '', '', 'oil', 'ice'],
-    pid: "d2",
-  }));
-  $('#skipC').click(() => loadGame({
-    flags: {
-      "gotMoneyFromFairy": 1,
-      "tutorialDone2": 1,
-      "tutorialDone1": 1,
-      "pondFished": 1,
-      "catFed": 1,
-      "doorOpen": 1,
-      "feePaid": 1,
-      "nurseHelped": 1,
-      "midbossCleaned": 1,
-      "midbossDefeated": 1,
-      "moneyStolen": 1,
-      "stoneOiled": 1,
-      "swordPulled": 1,
-      "lakeFished": 1,
-      "iceEscaped": 1,
-      "fireIced": 1,
-      "gemPicked": 1,
-      "crafted": 1,
-      "visited": {
-        "a1": 1, "a2": 1, "a3": 1, "a4": 1, "a5": 1, "a6": 1, "a7": 1, "s": 1,
-        "b1": 1, "b2": 1, "b3": 1, "b4": 1, "b5": 1, "b6": 1, "b7": 1, "b8": 1,
-        "c1": 1, "c2": 1, "c3": 1, "c4": 1, "c5": 1, "c6": 1, "c7": 1, "c8": 1, "c9": 1,
-        "d1": 1, "d2": 1, "d3": 1, "d4": 1,
-      },
-    },
-    items: ['rod', 'powersword', '', '', 'oil', 'ice'],
-    pid: "d4",
   }));
 
   // ################################
