@@ -251,6 +251,7 @@ $(function () {
     } else {
       moveMap('f0');
     }
+    UTILS.showArrows();
     $('#scene-cover').addClass('hidden');
     saveGame();
   }
@@ -282,6 +283,7 @@ $(function () {
   }
 
   function loadGame(data) {
+    console.log(data);
     flags = data.flags;
     Object.keys(NPC_DATA).forEach(UTILS.refreshNpcOnMap);
     Object.keys(flags.visited || {}).forEach(visitMinimap);

@@ -189,13 +189,9 @@ div.scene {
   cursor: pointer;
 }
 
-#arrow-nw {
+#arrow-n {
   left: 68px; top: -33px;
-  transform: rotate(-122deg);
-}
-#arrow-ne {
-  right: 68px; top: -33px;
-  transform: rotate(-58deg);
+  transform: rotate(-90deg);
 }
 #arrow-w {
   left: -40px; top: 130px;
@@ -204,13 +200,9 @@ div.scene {
 #arrow-e {
   right: -40px; top: 130px;
 }
-#arrow-sw {
+#arrow-s {
   left: 68px; bottom: -33px;
-  transform: rotate(122deg);
-}
-#arrow-se {
-  right: 68px; bottom: -33px;
-  transform: rotate(58deg);
+  transform: rotate(270deg);
 }
 
 .map-npc {

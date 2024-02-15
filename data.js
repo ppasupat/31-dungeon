@@ -33,7 +33,7 @@ const [MAP_DATA, NPC_DATA] = function () {
   map_data.f0 = {
     pid: 'f0', row: 0, col: 2,
     arrows: {'e': 'f1'},
-    hideArrows: {'tutorialDone1': 'e'},
+    hideArrows: {'tutorialDone': 'e'},
     mainNpc: 'fairy',
   };
 
@@ -42,35 +42,52 @@ const [MAP_DATA, NPC_DATA] = function () {
     name: 'นางฟ้า',
     actionText: 'ขอตังหน่อย',
     itemText: GIVE,
-    mapStates: {'tutorialDone1': 'gone'},
+    mapStates: {'tutorialDone': 'gone'},
     content: function (op, flags, utils) {
       switch (op) {
         case 'enter':
-          if (!flags.gotMoneyFromFairy) 
-            return R(0, true, false, [
-              'สวัสดีจ้ะ เธอคือผู้กล้าที่จะมาช่วยพวกเราจาก<b>จอมมาร</b>สินะ',
-              'มีอะไรให้ฉันช่วยไหม?']);
-          else
-            return R(0, false, true, [
-              'ก่อนเธอจะไป ลองฝึกใช้ไอเทมดูหน่อยนะ<br><i>(เลือก<b>เงิน</b>แล้วกด “ให้”)</i>']);
+          return R(0, true, false, [
+              '<b>ช่วยด้วย!</b><br>',
+              'จอมมารจาก 2 ปีที่แล้ว มันกลับมาอีกแล้ว!']);
         case 'action':
-          flags.gotMoneyFromFairy = 1;
-          utils.addItem('money');
-          return R(1, false, true, [
-            'งกจริง!<br>เอาไป <b>30 บาท</b>',
-            'ก่อนเธอจะไป ลองฝึกใช้ไอเทมดูหน่อยนะ<br><i>(เลือก<b>เงิน</b>แล้วกด “ให้”)</i>']);
-        case 'money':
-          utils.deselectItems();
-          flags.tutorialDone1 = flags.tutorialDone2 = 1;
+          flags.tutorialDone = 1;
           utils.refreshNpcOnMap('fairy');
           utils.showArrows();
-          return R(0, false, false, [
-            '555+ ล้อเล่นๆ ไม่ต้องคืนเงินฉันหรอก',
-            'ฉันเปิดทางให้แล้ว<br><b>ขอให้โชคดี!</b>']);
+          return R(1, false, false, [
+            'นี่เธอยังไม่ได้คืน 30 บาทที่ยืมไปเลยนะ!<br>',
+            '<b>ไม่ให้โว้ย!</b>']);
       }
     },
   };
 
+  // f1
+  map_data.f1 = {
+    pid: 'f1', row: 0, col: 3,
+    arrows: {'w': 'f0'},
+    mainNpc: 'timemachineCase',
+  };
+
+  npc_data.timemachineCase = {
+    nid: 'timemachineCase', loc: 'f1',
+    name: '',
+    actionText: 'หยิบ <b>ไทม์แมชชีน</b>',
+    itemText: GIVE,
+    mapStates: {'timemachinePickedUp': 'gone'},
+    content: function (op, flags, utils) {
+      switch (op) {
+        case 'enter':
+          return R(0, true, false, [
+            '']);
+        case 'action':
+          flags.timemachinePickedUp = 1;
+          utils.addItem('timemachine');
+          utils.refreshNpcOnMap('timemachineCase');
+          return R(1, false, false, [
+            '']);
+      }
+    },
+  };
+  
   return [map_data, npc_data];
 
 }();
