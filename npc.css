@@ -21,6 +21,14 @@
   transform: scale(0.5);
 }
 
+.map-fairy {
+  top: 130px;
+  left: 1270px;
+}
+.map-fairy > .msp {
+  transform: scale(0.5);
+}
+
 .map-dwarfWorking {
   top: 80px;
   left: 620px;
@@ -30,19 +38,45 @@
   transform: scale(0.5);
 }
 
-.map-fairy {
-  top: 130px;
-  left: 1270px;
-}
-.map-fairy > .msp {
-  transform: scale(0.5);
-}
-
 .map-timeTravelerFirst {
   top: 80px;
   left: 1830px;
 }
 .map-timeTravelerFirst > .msp {
+  transform: scale(0.5);
+}
+
+.map-bridgeFrame {
+  top: 250px;
+  left: 700px;
+  display: none;
+}
+.map-bridgeFrame > .msp {
+  transform: scale(0.8);
+}
+
+.map-bridge {
+  top: 250px;
+  left: 1700px;
+  display: none;
+}
+.map-bridge > .msp {
+  transform: scale(0.8);
+}
+
+.map-aristocrat {
+  top: 900px;
+  left: 100px;
+}
+.map-aristocrat > .msp {
+  transform: scale(0.5);
+}
+
+.map-safe {
+  top: 900px;
+  left: 1100px;
+}
+.map-safe > .msp {
   transform: scale(0.5);
 }
 
