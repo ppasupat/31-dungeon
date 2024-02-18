@@ -275,7 +275,7 @@ const [MAP_DATA, NPC_DATA] = function () {
   // p7
   map_data.p7 = {
     pid: 'p7', row: 3, col: 1,
-    arrows: {'n': 'p5'},
+    arrows: {'n': 'p5', 's': 'p9'},
     mainNpc: 'plotPast',
   }
 
@@ -339,7 +339,7 @@ const [MAP_DATA, NPC_DATA] = function () {
   // f7
   map_data.f7 = {
     pid: 'f7', row: 3, col: 3,
-    arrows: {'n': 'f5'},
+    arrows: {'n': 'f5', 's': 'f9'},
     mainNpc: 'plotFuture',
   }
 
@@ -411,7 +411,234 @@ const [MAP_DATA, NPC_DATA] = function () {
       }
     },
   };
-  
+
+  // ################################
+  // Room 8
+
+  // p8
+  map_data.p8 = {
+    pid: 'p8', row: 4, col: 0,
+    arrows: {'e': 'p9'},
+  };
+
+  // f8
+  map_data.f8 = {
+    pid: 'f8', row: 4, col: 2,
+    arrows: {'e': 'f9'},
+    mainNpc: 'sorcerer',
+  };
+
+  npc_data.sorcerer = {
+    nid: 'sorcerer', loc: 'f8',
+    name: 'จอมเวทย์',
+    actionText: 'เวทศักดิ์สิทธิ์ใช้งัย?',
+    itemText: GIVE,
+    content: function (op, flags, utils) {
+      let mood = function () {
+        return 2 * (flags.lemonGiven ? 1 : 0) + (flags.teaGiven ? 1 : 0)
+      };
+      switch (op) {
+        case 'enter':
+          if (flags.teaGiven && flags.lemonGiven) {
+            return R(3, true, false, [
+              'ขอบใจเจ้าอีกครั้ง',
+            ]);
+          } else {
+            return R(mood(), false, true, [
+              '<b>แค่ก ๆ</b><br>ข้า... เจ็บ... คอ...',
+            ]);
+          }
+        case 'action':
+          return R(4, true, false, [
+            'วาด<b>วงเวทย์</b><br>แล้วท่อง<b>คาถา</b><br>',
+            'ของที่อยู่ในวงเวทจะถูกล้างมลทิน!',
+          ]);
+        case 'lemon':
+          utils.removeItem('lemon');
+          flags.lemonGiven = 1;
+          if (!flags.teaGiven) {
+            return R(2, false, true, [
+              '<b>มะนาว</b>รึ?<br>ก็ดีนะ แต่กินมะนาวเฉย ๆ มันเปรี้ยวเกิน',
+            ]);
+          } else {
+            return R(3, true, false, [
+              'ชามะนาวได้ผลดีจริง ๆ ข้าจะให้ <b>เวทศักดิ์สิทธิ์</b> แก่เจ้า'
+            ]);
+          }
+        case 'tea':
+          utils.removeItem('tea');
+          flags.teaGiven = 1;
+          if (!flags.lemonGiven) {
+            return R(1, false, true, [
+              '<b>ชา</b>รึ?<br>ก็ดีนะ แต่กินชาเฉย ๆ มันขมเกิน',
+            ]);
+          } else {
+            return R(3, true, false, [
+              'ชามะนาวได้ผลดีจริง ๆ ข้าจะให้ <b>เวทศักดิ์สิทธิ์</b> แก่เจ้า',
+            ]);
+          }
+        case 'seedling':
+          return R(mood(), false, true, [
+            'แค่ก ๆ ไม่เอา กินไม่ได้',
+          ]);
+      }
+    },
+  };
+
+  // ################################
+  // Room 9
+
+  // p9
+  map_data.p9 = {
+    pid: 'p9', row: 4, col: 1,
+    arrows: {'w': 'p8', 'n': 'p7'},
+    mainNpc: 'throne',
+  };
+
+  npc_data.throne = {
+    nid: 'throne', loc: 'p9',
+    name: 'บัลลังก์',
+    actionText: 'จิ๊กของ',
+    itemText: USE,
+    mapStates: {'magicCircleDrawn': 'map-throne-1'},
+    content: function (op, flags, utils) {
+      let mood = function () {return flags.magicCircleDrawn ? 1 : 0};
+      switch (op) {
+        case 'enter':
+          return R(mood(), true, true, [
+            'เก้าอี้สุดหรู สำหรับเจ้าของปราสาท',
+          ]);
+        case 'action':
+          return R(mood(), true, true, [
+            'บัลลังก์ใหญ่เกินไป จิ๊กไม่ได้',
+          ]);
+        case 'spell':
+          if (flags.magicCircleDrawn) {
+            return R(mood(), true, true, [
+              'คุณได้วาด <b>วงเวทย์</b> ไว้แล้ว',
+            ]);
+          } else {
+            flags.magicCircleDrawn = 1;
+            utils.refreshNpcOnMap('throne');
+            utils.refreshNpcOnMap('boss');
+            return R(mood(), true, true, [
+              'คุณวาด <b>วงเวทย์</b> ข้างล่างบัลลังก์',
+            ]);
+          }
+        case 'lemon':
+          return R(mood(), true, true, [
+            'คุณใช้ <b>มะนาว</b><br>บัลลังก์เปรี้ยวขึ้นเล็กน้อย',
+          ]);
+        case 'tea':
+          return R(mood(), true, true, [
+            'คุณใช้ <b>ชา</b><br>บัลลังก์กลิ่นหอมขึ้นเล็กน้อย',
+          ]);
+        case 'seedling':
+          return R(mood(), true, true, [
+            'คุณใช้ <b>ต้นกล้า</b><br>บัลลังก์เปรอะดินเล็กน้อย',
+          ]);
+      }
+    },
+  };
+
+  // f9
+  map_data.f9 = {
+    pid: 'f9', row: 4, col: 3,
+    arrows: {'w': 'f8', 'n': 'f7'},
+    mainNpc: 'boss',
+  };
+
+  npc_data.boss = {
+    nid: 'boss', loc: 'f9',
+    name: 'จอมมารที่ชื่อว่าอนุทิ',
+    actionText: 'ร่างใหม่น่าเกลียดจัง',
+    itemText: USE,
+    mapStates: {'magicCircleDrawn': 'map-boss-1'},
+    content: function (op, flags, utils) {
+      let mood = function () {return flags.magicCircleDrawn ? 1 : 0};
+      switch (op) {
+        case 'enter':
+          return R(mood(), true, true, [
+            '<b>ฮ่า ๆ</b><br>เจอกันอีกแล้วสินะ ครั้งนี้แกเสร็จข้าแน่!',
+          ]);
+        case 'action':
+          return R(mood(), true, true, [
+            '<b>ฮ่า ๆ</b><br>ร่างใหม่ของข้า ถึงดาบปราบมารก็ไม่สะท้าน!',
+          ]);
+        case 'spell':
+          if (!flags.magicCircleDrawn) {
+            return R(mood(), true, true, [
+              '<b>ฮ่า ๆ</b><br>แค่เศษกระดาษ จะทำอะไรข้าได้!',
+            ]);
+          } else {
+            utils.removeItem('spell');
+            flags.gameWon = 1;
+            utils.refreshNpcOnMap('boss');
+            return R(2, false, false, [
+              'ทำไมมันร้อนอย่างนี้!<br><b>อ้ากกกก!!!</b><br>ฝากไว้ก่อนเถอะ!!!',
+            ]);
+          }
+        case 'lemon':
+          return R(mood(), true, true, [
+            '<b>ฮ่า ๆ</b><br>เปรี้ยวนักเรอะ?!',
+          ]);
+        case 'tea':
+          return R(mood(), true, true, [
+            '<b>ฮ่า ๆ</b><br>ข้ามีพลัง<b>กันชา</b>!',
+          ]);
+        case 'seedling':
+          return R(mood(), true, true, [
+            '<b>ฮ่า ๆ</b><br>เธอไม่ "กล้า" หือข้าหรอก</b>!',
+          ]);
+      }
+    },
+  };
+
+  // ################################
+  // Win screen
+
+  map_data.px = {
+    pid: 'px', row: 4, col: 4,
+    arrows: {},
+  };
+
+  // Don't persist the states
+  let congratsState = 0;
+  let congratsTexts = [
+    {q: 'เธอเป็นใคร?', a: '... ฉันคือเธอจากโลกอนาคต ...'},
+    {q: 'เธอมาที่นี่ทำไม?', a: '... ฉันมาช่วยเธอปราบจอมมาร ...'},
+    {q: 'อนาคตฉันเป็นงัย?', a: '... ปีหน้า เธอจะอายุมากขึ้น 1 ปี ...'},
+    {q: 'หวยงวดหน้าออกอะไร?', a: '... จำได้แต่ว่าเป็นเลข 6 หลัก ...'},
+    {q: 'ฉันจะได้แต่งงานไหม?', a: '... อืม คงได้แต่งงานวิจัยอีก ...'},
+    {q: 'มีอะไรจะบอกอีกไหม?', a: '... สุขสันต์วันเกิดนะ! ...'},
+  ];
+
+  npc_data.timeTravelerCongrats = {
+    nid: 'timeTravelerCongrats', loc: 'px',
+    nidAlias: 'timeTravler',
+    name: '???',
+    actionText: congratsTexts[0].q,
+    itemText: XXX,
+    content: function (op, flags, utils) {
+      switch (op) {
+        case 'enter':
+          return R(0, true, false, ['...']);
+        case 'action':
+          let answer = [
+            '<i>' + congratsTexts[congratsTexts].q + '</i><br>',
+            congratsTexts[congratsState].a,
+          ];
+          congratsState += 1;
+          if (congratsState === congratsTexts.length) {
+            return R(0, false, false, answer);
+          } else {
+            utils.changeActionText(congratsTexts[congratsState].q);
+            return R(0, true, false, answer);
+          }
+      };
+    },
+  };
+
   return [map_data, npc_data];
 
 }();

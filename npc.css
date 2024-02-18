@@ -96,6 +96,30 @@
   transform: scale(0.5);
 }
 
+.map-sorcerer {
+  top: 1700px;
+  left: 1100px;
+}
+.map-sorcerer > .msp {
+  transform: scale(0.5);
+}
+
+.map-throne {
+  top: 1700px;
+  left: 600px;
+}
+.map-throne > .msp {
+  transform: scale(0.5);
+}
+
+.map-boss {
+  top: 1700px;
+  left: 1600px;
+}
+.map-boss > .msp {
+  transform: scale(0.5);
+}
+
 /* ################################ */
 /* NPC encounter */
 

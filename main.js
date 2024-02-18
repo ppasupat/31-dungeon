@@ -181,6 +181,10 @@ $(function () {
   }
   $('#btn-leave-wrapper').click(hideEncounter);
 
+  UTILS.changeActionText = function (text) {
+    $('#btn-action').html(text);
+  };
+
   // ################################
   // Inventory
 
