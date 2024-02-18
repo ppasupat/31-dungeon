@@ -222,6 +222,11 @@ const [MAP_DATA, NPC_DATA] = function () {
     mainNpc: 'safe',
   };
 
+  function initSafeLock(successCallback) {
+    $('#npc-extra').empty();
+    $('<button>').text('OPEN').click(successCallback).appendTo('#npc-extra');
+  }
+
   npc_data.safe = {
     nid: 'safe', loc: 'f4',
     name: 'ตู้เซฟ',
@@ -231,6 +236,15 @@ const [MAP_DATA, NPC_DATA] = function () {
     content: function (op, flags, utils) {
       switch (op) {
         case 'enter':
+          initSafeLock(function () {
+            flags.safeOpen = 1;
+            utils.refreshNpcOnMap('safe');
+            utils.displayEncounterContent(
+              R(1, true, false, [
+                'ประตูเซฟเปิดออกแล้ว',
+              ])
+            );
+          });
           return R(flags.safeOpen ? 1 : 0, true, false, [
             'ตู้เซฟ ดูแข็งแรง',
           ]);
@@ -449,7 +463,7 @@ const [MAP_DATA, NPC_DATA] = function () {
             ]);
           }
         case 'action':
-          return R(4, true, false, [
+          return R(3, true, false, [
             'วาด<b>วงเวทย์</b><br>แล้วท่อง<b>คาถา</b><br>',
             'ของที่อยู่ในวงเวทจะถูกล้างมลทิน!',
           ]);
@@ -461,6 +475,7 @@ const [MAP_DATA, NPC_DATA] = function () {
               '<b>มะนาว</b>รึ?<br>ก็ดีนะ แต่กินมะนาวเฉย ๆ มันเปรี้ยวเกิน',
             ]);
           } else {
+            utils.addItem('spell');
             return R(3, true, false, [
               'ชามะนาวได้ผลดีจริง ๆ ข้าจะให้ <b>เวทศักดิ์สิทธิ์</b> แก่เจ้า'
             ]);
@@ -473,6 +488,7 @@ const [MAP_DATA, NPC_DATA] = function () {
               '<b>ชา</b>รึ?<br>ก็ดีนะ แต่กินชาเฉย ๆ มันขมเกิน',
             ]);
           } else {
+            utils.addItem('spell');
             return R(3, true, false, [
               'ชามะนาวได้ผลดีจริง ๆ ข้าจะให้ <b>เวทศักดิ์สิทธิ์</b> แก่เจ้า',
             ]);
@@ -610,7 +626,7 @@ const [MAP_DATA, NPC_DATA] = function () {
     {q: 'อนาคตฉันเป็นงัย?', a: '... ปีหน้า เธอจะอายุมากขึ้น 1 ปี ...'},
     {q: 'หวยงวดหน้าออกอะไร?', a: '... จำได้แต่ว่าเป็นเลข 6 หลัก ...'},
     {q: 'ฉันจะได้แต่งงานไหม?', a: '... อืม คงได้แต่งงานวิจัยอีก ...'},
-    {q: 'มีอะไรจะบอกอีกไหม?', a: '... สุขสันต์วันเกิดนะ! ...'},
+    {q: 'มีอะไรจะบอกอีกไหม?', a: '... สุขสันต์วันเกิดนะ!'},
   ];
 
   npc_data.timeTravelerCongrats = {
@@ -625,7 +641,7 @@ const [MAP_DATA, NPC_DATA] = function () {
           return R(0, true, false, ['...']);
         case 'action':
           let answer = [
-            '<i>' + congratsTexts[congratsTexts].q + '</i><br>',
+            '<i>' + congratsTexts[congratsState].q + '</i><br>',
             congratsTexts[congratsState].a,
           ];
           congratsState += 1;

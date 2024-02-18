@@ -126,7 +126,7 @@ $(function () {
     showEncounter(this.dataset.nid);
   });
 
-  function displayEncounterContent(content) {
+  UTILS.displayEncounterContent = function(content) {
     if (!content) {
       $('#npc-dialog').text('ERROR!');
       console.log(currentPid, currentNid, flags);
@@ -153,21 +153,21 @@ $(function () {
     $('#npc-name').html(NPC_DATA[nid].name);
     $('#btn-action').html(NPC_DATA[nid].actionText);
     setBtnItemText();
-    displayEncounterContent(NPC_DATA[nid].content('enter', flags, UTILS));
+    UTILS.displayEncounterContent(NPC_DATA[nid].content('enter', flags, UTILS));
     $('#encounter').removeClass('hidden');
     $('#timemachine').addClass('time-dimmed');
   }
 
   $('#btn-action-wrapper').click(function () {
     if (! $('#btn-action-wrapper').hasClass('enabled')) return;
-    displayEncounterContent(NPC_DATA[currentNid].content('action', flags, UTILS));
+    UTILS.displayEncounterContent(NPC_DATA[currentNid].content('action', flags, UTILS));
   });
 
   $('#btn-item-wrapper').click(function () {
     if (! $('#btn-item-wrapper').hasClass('enabled')) return;
     let iid = getSelectedItem();
     if (!iid) return;
-    displayEncounterContent(NPC_DATA[currentNid].content(iid, flags, UTILS));
+    UTILS.displayEncounterContent(NPC_DATA[currentNid].content(iid, flags, UTILS));
   });
 
   function hideEncounter() {
@@ -255,9 +255,8 @@ $(function () {
     let showWinSceneInner = function () {
       $('#scene-cover').off('transitionend', showWinSceneInner);
       $('#btn-leave-wrapper').hide();
-      UTILS.removeItem('rod');
-      UTILS.removeItem('money');
-      showEncounter('cake');
+      showEncounter('timeTravelerCongrats');
+      moveMap('px');
       $('#scene-cover').addClass('hidden');
     };
     $('#scene-cover').on('transitionend', showWinSceneInner).removeClass('hidden');
@@ -318,30 +317,8 @@ $(function () {
     if (flags.gameWon) showWinScene();
   }
 
-  $('#skipA').click(() => loadGame({
-    flags: {
-      "gotMoneyFromFairy": 1,
-      "tutorialDone2": 1,
-      "tutorialDone1": 1,
-      "pondFished": 1,
-      "catFed": 1,
-      "visited": {
-        "a1": 1, "a2": 1, "a3": 1, "a4": 1, "a5": 1, "a6": 1, "a7": 1, "s": 1,
-      },
-    },
-    items: ['rod', 'key', '', '', 'oil', ''],
-    pid: 'a4',
-  }));
-
   // ################################
   // Preloading and screen resizing
-
-  function gup(name) {
-    let regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
-    let results = regex.exec(window.location.href);
-    return results === null ? "" : decodeURIComponent(results[1]);
-  }
-  if (gup('cheat')) $('#cheats').show();
 
   const H_SCREEN_WIDTH = 700, H_SCREEN_HEIGHT = 400,
     V_SCREEN_WIDTH = 500, V_SCREEN_HEIGHT = 580;

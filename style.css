@@ -111,10 +111,6 @@ div.scene {
   height: 580px;
 }
 
-#cheats {
-  display: none;
-}
-
 /* ################################ */
 /* preload scene */
 
@@ -272,6 +268,9 @@ div.scene {
 }
 #npc-pic {
   background-image: url('img/sheet.png');
+}
+#npc-extra {
+  display: none;
 }
 
 #npc-name-wrapper {
