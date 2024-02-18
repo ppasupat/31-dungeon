@@ -8,7 +8,12 @@ const [MAP_DATA, NPC_DATA] = function () {
 
   const itemNames = {
     sword: 'ดาบปราบมาร',
+    seedling: 'ต้นกล้า',
+    lemon: 'มะนาว',
+    tea: 'ใบชา',
+    spell: 'เวทศักดิ์สิทธิ์',
   };
+  const XXX = (x => '???');
   const GIVE = (x => 'ให้ <b>' + (itemNames[x] || '???') + '</b>');
   const USE = (x => 'ใช้ <b>' + (itemNames[x] || '???') + '</b>');
   const GRAY = '#667', BROWN = '#741', PURPLE = '#606';
@@ -27,9 +32,76 @@ const [MAP_DATA, NPC_DATA] = function () {
   }
 
   // ################################
-  // Data
+  // Data: Past
 
-  // f0: fairy (start)
+  // p0
+  map_data.p0 = {
+    pid: 'p0', row: 0, col: 0,
+    arrows: {'e': 'p1'},
+    mainNpc: 'dwarfIdle',
+  };
+
+  npc_data.dwarfIdle = {
+    nid: 'dwarfIdle', loc: 'p0',
+    nidAlias: 'dwarf',
+    name: 'คนแคระ',
+    actionText: 'ช่วยสร้างสะพานที',
+    itemText: GIVE,
+    mapStates: {'swordGiven': 'gone'},
+    content: function (op, flags, utils) {
+      switch (op) {
+        case 'enter':
+          return R(0, true, true, [
+            'สวัสดี ข้าคือช่างก่อสร้างแห่งปราสาทหลังนี้',
+          ]);
+        case 'action':
+          return R(1, true, true, [
+            'ขอโทษด้วย ตอนนี้เลื่อยข้าเสีย ตัดไม้ไม่ได้',
+          ]);
+        case 'sword':
+          flags.swordGiven = 1;
+          utils.removeItem('sword');
+          [
+            'dwarfIdle', 'dwarfWorking', 'timeTravelerFirst',
+          ].map(utils.refreshNpcOnMap);
+          return R(2, false, false, [
+            'โอ้! ดาบนี้ตัดไม้ได้ดีจริง ๆ เดี๋ยวข้าเริ่มงานเลยแล้วกัน',
+          ]);
+      }
+    },
+  };
+
+  // p1
+  map_data.p1 = {
+    pid: 'p1', row: 0, col: 1,
+    arrows: {'w': 'p0'},
+    mainNpc: 'dwarfWorking',
+  };
+
+  npc_data.dwarfWorking = {
+    nid: 'dwarfWorking', loc: 'p1',
+    nidAlias: 'dwarf',
+    name: 'คนแคระ',
+    actionText: '',
+    itemText: XXX,
+    mapStates: {'swordGiven': 'appear'},
+    content: function (op, flags, utils) {
+      return R(0, false, false, [
+        'รอหน่อยนะ คงใช้เวลาก่อสร้างสักพัก',
+      ]);
+    },
+  };
+
+  // p3
+  map_data.p3 = {
+    pid: 'p3', row: 1, col: 1,
+    arrows: {},
+  };
+
+  // ################################
+  // Data: Future
+
+  // f0 (start)
   map_data.f0 = {
     pid: 'f0', row: 0, col: 2,
     arrows: {'e': 'f1'},
@@ -47,15 +119,15 @@ const [MAP_DATA, NPC_DATA] = function () {
       switch (op) {
         case 'enter':
           return R(0, true, false, [
-              '<b>ช่วยด้วย!</b><br>',
-              'จอมมารจาก 2 ปีที่แล้ว มันกลับมาอีกแล้ว!']);
+            '<b>ช่วยด้วย!</b><br>จอมมารมันกลับมาอีกแล้ว',
+          ]);
         case 'action':
           flags.tutorialDone = 1;
           utils.refreshNpcOnMap('fairy');
           utils.showArrows();
           return R(1, false, false, [
-            'นี่เธอยังไม่ได้คืน 30 บาทที่ยืมไปเลยนะ!<br>',
-            '<b>ไม่ให้โว้ย!</b>']);
+            '30 บาทครั้งที่แล้วยังไม่ได้คืนเลยนะยะ<br><b>ไม่ให้ย่ะ!</b>',
+          ]);
       }
     },
   };
@@ -63,29 +135,36 @@ const [MAP_DATA, NPC_DATA] = function () {
   // f1
   map_data.f1 = {
     pid: 'f1', row: 0, col: 3,
-    arrows: {'w': 'f0'},
-    mainNpc: 'timemachineCase',
+    arrows: {'w': 'f0', 's': 'f3'},
+    hideArrows: {'swordGiven': 's'},
+    mainNpc: 'timeTravelerFirst',
   };
 
-  npc_data.timemachineCase = {
-    nid: 'timemachineCase', loc: 'f1',
-    name: '',
-    actionText: 'หยิบ <b>ไทม์แมชชีน</b>',
-    itemText: GIVE,
-    mapStates: {'timemachinePickedUp': 'gone'},
+  npc_data.timeTravelerFirst = {
+    nid: 'timeTravelerFirst', loc: 'f1',
+    nidAlias: 'timeTraveler',
+    name: '???',
+    actionText: 'เอ่อ... ขอตังหน่อย?',
+    itemText: XXX,
+    mapStates: {'swordGiven': 'gone'},
     content: function (op, flags, utils) {
       switch (op) {
         case 'enter':
-          return R(0, true, false, [
-            '']);
+          return R(0, !flags.timeMachineTaken, false, ['...']);
         case 'action':
-          flags.timemachinePickedUp = 1;
-          utils.addItem('timemachine');
-          utils.refreshNpcOnMap('timemachineCase');
-          return R(1, false, false, [
-            '']);
+          flags.timeMachineTaken = 1;
+          utils.enableTimeMachine();
+          return R(0, false, false, [
+            '...<br>(คุณได้รับ<b>เครื่องย้อนเวลา</b>)',
+          ]);
       }
     },
+  }
+
+  // f3
+  map_data.f3 = {
+    pid: 'f3', row: 1, col: 3,
+    arrows: {'n': 'f1'},
   };
   
   return [map_data, npc_data];

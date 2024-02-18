@@ -190,7 +190,7 @@ div.scene {
 }
 
 #arrow-n {
-  left: 68px; top: -33px;
+  left: 180px; top: -33px;
   transform: rotate(-90deg);
 }
 #arrow-w {
@@ -201,8 +201,8 @@ div.scene {
   right: -40px; top: 130px;
 }
 #arrow-s {
-  left: 68px; bottom: -33px;
-  transform: rotate(270deg);
+  left: 180px; bottom: -33px;
+  transform: rotate(90deg);
 }
 
 .map-npc {
@@ -419,6 +419,7 @@ div.scene {
   position: absolute;
   left: 0; top: 176px;
   width: 180px; height: 80px;
+  cursor: pointer;
 }
 .vertical-screen #timemachine { left: 93px; top: 88px; }
 
@@ -428,7 +429,7 @@ div.scene {
   transform-origin: top left;
   transform: scale(0.5);
 }
-#timemachinesp.time-none { background: none; }
-#timemachinesp.time-future { background-position: 0 0; }
-#timemachinesp.time-past { background-position: 0 -160px; }
-#timemachinesp.time-dimmed { opacity: 0.5; }
+#timemachine.time-past > #timemachinesp { background-position: 0 -160px; }
+#timemachine.time-future > #timemachinesp { background-position: 0 0; }
+#timemachine.time-blank { display: none; }
+#timemachine.time-dimmed { opacity: 0.5; cursor: auto; }

@@ -20,7 +20,6 @@ $(function () {
     };
   }
 
-  // TODO: Transition for time travel
   function moveMap(pid) {
     if (currentPid === pid) {
       UTILS.showArrows();
@@ -54,6 +53,27 @@ $(function () {
   $('.arrow').click(e => {
     if (!$('#encounter').hasClass('hidden')) return;
     moveMap(MAP_DATA[currentPid].arrows[e.target.dataset.dir]);
+  });
+
+  UTILS.enableTimeMachine = function () {
+    $('#timemachine').removeClass('time-blank');
+    if (currentPid.charAt(0) === 'f') {
+      $('#timemachine').addClass('time-future');
+    } else {
+      $('#timemachine').addClass('time-past');
+    }
+  }
+
+  // TODO: Transition for time travel
+  $('#timemachine').click(e => {
+    if ($('#timemachine').hasClass('time-dimmed')) return;
+    if ($('#timemachine').hasClass('time-past')) {
+      $('#timemachine').addClass('time-future').removeClass('time-past');
+      moveMap('f' + currentPid.slice(1));
+    } else {
+      $('#timemachine').addClass('time-past').removeClass('time-future');
+      moveMap('p' + currentPid.slice(1));
+    }
   });
 
   // ################################
@@ -136,6 +156,7 @@ $(function () {
     setBtnItemText();
     displayEncounterContent(NPC_DATA[nid].content('enter', flags, UTILS));
     $('#encounter').removeClass('hidden');
+    $('#timemachine').addClass('time-dimmed');
   }
 
   $('#btn-action-wrapper').click(function () {
@@ -154,6 +175,7 @@ $(function () {
     currentNid = null;
     UTILS.deselectItems();
     $('#encounter').addClass('hidden');
+    $('#timemachine').removeClass('time-dimmed');
     $('#Inventory').removeClass('selectable');
     saveGame();
     if (flags.gameWon) showWinScene();
@@ -289,6 +311,7 @@ $(function () {
     Object.keys(flags.visited || {}).forEach(visitMinimap);
     data.items.forEach(UTILS.addItem);
     moveMap(data.pid);
+    if (flags.timeMachineTaken) UTILS.enableTimeMachine();
     if (flags.gameWon) showWinScene();
   }
 
