@@ -96,7 +96,6 @@ $(function () {
       let npcDiv = $('<div class=map-npc>').attr({
         'data-nid': npc.nid,
       }).addClass('map-' + npc.nid).appendTo('#map');
-      // npcDiv.text(npc.name);
       npcDiv.append($('<div class=msp>'));
       if (npc.nidAlias) npcDiv.addClass('map-' + npc.nidAlias);
       if (npc.cosmetic) npcDiv.addClass('cosmetic');

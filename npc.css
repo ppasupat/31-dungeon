@@ -80,6 +80,22 @@
   transform: scale(0.5);
 }
 
+.map-plotPast {
+  top: 1350px;
+  left: 700px;
+}
+.map-plotPast > .msp {
+  transform: scale(0.5);
+}
+
+.map-plotFuture {
+  top: 1350px;
+  left: 1700px;
+}
+.map-plotFuture > .msp {
+  transform: scale(0.5);
+}
+
 /* ################################ */
 /* NPC encounter */
 

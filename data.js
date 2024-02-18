@@ -95,6 +95,9 @@ const [MAP_DATA, NPC_DATA] = function () {
         case 'action':
           flags.tutorialDone = 1;
           utils.refreshNpcOnMap('fairy');
+          // Need to set up non-zero flags here.
+          flags.seedlingUntouched = 1;
+          utils.refreshNpcOnMap('plotFuture');
           utils.showArrows();
           return R(1, false, false, [
             '30 บาทครั้งที่แล้วยังไม่ได้คืนเลยนะยะ<br><b>ไม่ให้ย่ะ!</b>',
@@ -228,7 +231,7 @@ const [MAP_DATA, NPC_DATA] = function () {
     content: function (op, flags, utils) {
       switch (op) {
         case 'enter':
-          return R(flags.safeOpen || 0, true, false, [
+          return R(flags.safeOpen ? 1 : 0, true, false, [
             'ตู้เซฟ ดูแข็งแรง',
           ]);
         case 'action':
@@ -237,6 +240,8 @@ const [MAP_DATA, NPC_DATA] = function () {
               'ตู้เซฟปิดอยู่ ต้องเปิดมันก่อน',
             ]);
           } else if (!flags.teaTaken) {
+            utils.addItem('tea');
+            flags.teaTaken = 1;
             return R(1, true, false, [
               'คุณหยิบ <b>ใบชา</b> จากตู้เซฟ',
             ]);
@@ -255,13 +260,156 @@ const [MAP_DATA, NPC_DATA] = function () {
   // p5
   map_data.p5 = {
     pid: 'p5', row: 2, col: 1,
-    arrows: {'n': 'p3', 'w': 'p4'},
+    arrows: {'n': 'p3', 'w': 'p4', 's': 'p7'},
   };
 
   // f5
   map_data.f5 = {
     pid: 'f5', row: 2, col: 3,
-    arrows: {'n': 'f3'},
+    arrows: {'n': 'f3', 's': 'f7'},
+  };
+
+  // ################################
+  // Room 7
+
+  // p7
+  map_data.p7 = {
+    pid: 'p7', row: 3, col: 1,
+    arrows: {'n': 'p5'},
+    mainNpc: 'plotPast',
+  }
+
+  npc_data.plotPast = {
+    nid: 'plotPast', loc: 'p7',
+    nidAlias: 'plot',
+    name: 'แปลงปลูกพืช',
+    actionText: 'จิ๊กของ',
+    itemText: USE,
+    mapStates: {'seedlingPlanted': 'map-plot-1'},
+    content: function (op, flags, utils) {
+      switch (op) {
+        case 'enter':
+          if (!flags.seedlingPlanted) {
+            return R(0, true, true, [
+              'มีแต่ดิน',
+            ]);
+          } else {
+            return R(1, true, true, [
+              'มี <b>ต้นกล้า</b> อยู่ในดิน',
+            ]);
+          }
+        case 'action':
+          if (!flags.seedlingPlanted) {
+            return R(0, true, true, [
+              'ไม่มีอะไรอยู่ในดิน',
+            ]);
+          } else {
+            utils.addItem('seedling');
+            flags.seedlingPlanted = 0;
+            utils.refreshNpcOnMap('plotPast');
+            utils.refreshNpcOnMap('plotFuture');
+            return R(0, true, true, [
+              'คุณถอน <b>ต้นกล้า</b> จากดินอย่างระมัดระวัง',
+            ]);
+          }
+        case 'seedling':
+          utils.removeItem('seedling');
+          flags.seedlingPlanted = 1;
+          utils.refreshNpcOnMap('plotPast');
+          utils.refreshNpcOnMap('plotFuture');
+          return R(1, true, true, [
+            'คุณฝัง <b>ต้นกล้า</b> ลงในดิน',
+          ]);
+        case 'tea':
+          return R(flags.seedlingPlanted ? 1 : 0, true, true, [
+            'ใบชาตากแห้ง ใช้ปลูกไม่ได้',
+          ]);
+        case 'lemon':
+          return R(flags.seedlingPlanted ? 1 : 0, true, true, [
+            'จะฝังทั้งลูกเลยเหรอ ไม่ดีมั้ง?',
+          ]);
+        case 'spell':
+          return R(flags.seedlingPlanted ? 1 : 0, true, true, [
+            'เพื่ออะไร?',
+          ]);
+      }
+    },
+  };
+
+  // f7
+  map_data.f7 = {
+    pid: 'f7', row: 3, col: 3,
+    arrows: {'n': 'f5'},
+    mainNpc: 'plotFuture',
+  }
+
+  npc_data.plotFuture = {
+    nid: 'plotFuture', loc: 'f7',
+    nidAlias: 'plot',
+    name: 'แปลงปลูกพืช',
+    actionText: 'จิ๊กของ',
+    itemText: USE,
+    mapStates: {'seedlingUntouched': 'map-plot-1', 'seedlingPlanted': 'map-plot-2'},
+    content: function (op, flags, utils) {
+      switch (op) {
+        case 'enter':
+          if (flags.seedlingPlanted) {
+            return R(2, true, false, [
+              'มี <b>มะนาว</b> อยู่บนต้นไม้',
+            ]);
+          } else if (flags.seedlingUntouched) {
+            return R(1, true, true, [
+              'มี <b>ต้นกล้า</b> อยู่ในดิน',
+            ]);
+          } else {
+            return R(0, true, true, [
+              'ไม่มีอะไรอยู่ในดิน',
+            ]);
+          }
+        case 'action':
+          if (flags.seedlingPlanted) {
+            if (!flags.lemonTaken) {
+              utils.addItem('lemon');
+              flags.lemonTaken = 1;
+              return R(2, true, false, [
+                'คุณเด็ด <b>มะนาว</b> จากต้นไม้',
+              ]);
+            } else {
+              return R(2, true, false, [
+                'พอแล้วลูก งกจริง',
+              ]);
+            }
+          } else {
+            if (flags.seedlingUntouched) {
+              utils.addItem('seedling');
+              flags.seedlingUntouched = 0;
+              utils.refreshNpcOnMap('plotFuture');
+              return R(0, true, true, [
+                'คุณถอน <b>ต้นกล้า</b> จากดินอย่างระมัดระวัง',
+              ]);
+            } else {
+              return R(0, true, true, [
+                'ไม่มีอะไรอยู่ในดิน',
+              ]);
+            }
+          }
+        case 'seedling':
+          utils.removeItem('seedling');
+          flags.seedlingUntouched = 1;
+          utils.refreshNpcOnMap('plotFuture');
+          return R(1, true, true, [
+            'คุณฝัง <b>ต้นกล้า</b> ลงในดิน',
+          ]);
+        case 'tea':
+          return R(flags.seedlingUntouched ? 1 : 0, true, true, [
+            'ใบชาตากแห้ง ใช้ปลูกไม่ได้',
+          ]);
+        case 'lemon':
+          return R(flags.seedlingUntouched ? 1 : 0, true, true, [
+            'จะฝังทั้งลูกเลยเหรอ ไม่ดีมั้ง?',
+          ]);
+      }
+    },
   };
   
   return [map_data, npc_data];
