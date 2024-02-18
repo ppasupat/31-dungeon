@@ -391,15 +391,11 @@ div.scene {
 .item:nth-child(2) { left: 93px; top: 0; }
 .item:nth-child(3) { left: 0; top: 88px; }
 .item:nth-child(4) { left: 93px; top: 88px; }
-.item:nth-child(5) { left: 0; top: 176px; }
-.item:nth-child(6) { left: 93px; top: 176px; }
 
 .vertical-screen .item:nth-child(1) { left: 0; top: 0; }
 .vertical-screen .item:nth-child(2) { left: 93px; top: 0; }
 .vertical-screen .item:nth-child(3) { left: 186px; top: 0; }
 .vertical-screen .item:nth-child(4) { left: 0; top: 88px; }
-.vertical-screen .item:nth-child(5) { left: 93px; top: 88px; }
-.vertical-screen .item:nth-child(6) { left: 186px; top: 88px; }
 
 .item.selected {
   background-color: #ffd;
@@ -418,3 +414,21 @@ div.scene {
   border: none;
   cursor: auto;
 }
+
+#timemachine {
+  position: absolute;
+  left: 0; top: 176px;
+  width: 180px; height: 80px;
+}
+.vertical-screen #timemachine { left: 93px; top: 88px; }
+
+#timemachinesp {
+  background-image: url('img/timemachine.png');
+  position: absolute; top: 0; left: 0; width: 360px; height: 160px;
+  transform-origin: top left;
+  transform: scale(0.5);
+}
+#timemachinesp.time-none { background: none; }
+#timemachinesp.time-future { background-position: 0 0; }
+#timemachinesp.time-past { background-position: 0 -160px; }
+#timemachinesp.time-dimmed { opacity: 0.5; }

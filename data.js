@@ -7,7 +7,7 @@ const [MAP_DATA, NPC_DATA] = function () {
   // Macros
 
   const itemNames = {
-    powersword: 'ดาบปราบมาร',
+    sword: 'ดาบปราบมาร',
   };
   const GIVE = (x => 'ให้ <b>' + (itemNames[x] || '???') + '</b>');
   const USE = (x => 'ใช้ <b>' + (itemNames[x] || '???') + '</b>');

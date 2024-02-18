@@ -223,17 +223,11 @@
   transform-origin: top left;
   transform: scale(0.5);
 }
-.item-oil { background-position: 0 0; }
-.item-ice { background-position: -170px 0; }
-.item-money { background-position: -340px 0; }
-.item-rod { background-position: -510px 0; }
-.item-fish { background-position: -680px 0; }
-.item-grilledfish { background-position: -850px 0; }
-.item-key { background-position: -1020px 0; }
-.item-entkit { background-position: -1190px 0; }
-.item-sword { background-position: -1360px 0; }
-.item-gem { background-position: -1530px 0; }
-.item-powersword { background-position: -1700px 0; }
+.item-sword { background-position: 0 0; }
+.item-seedling { background-position: -170px 0; }
+.item-lemon { background-position: -340px 0; }
+.item-tea { background-position: -510px 0; }
+.item-spell { background-position: -680px 0; }
 .item[data-iid=""] > .isp {
   background: none;
 }

@@ -20,6 +20,7 @@ $(function () {
     };
   }
 
+  // TODO: Transition for time travel
   function moveMap(pid) {
     if (currentPid === pid) {
       UTILS.showArrows();
@@ -260,7 +261,7 @@ $(function () {
 
   function saveGame() {
     let data = {flags: flags, items: getAllItems(), pid: currentPid};
-    console.log(data);
+    console.log('save', data);
     try {
       localStorage.setItem(APP_NAME, JSON.stringify(data));
     } catch (e) {
@@ -274,7 +275,6 @@ $(function () {
 
   function getSavedGame() {
     let data = localStorage.getItem(APP_NAME);
-    console.log(data);
     if (data !== null) {
       data = JSON.parse(data);
       if (Object.keys(data.flags).length === 0) data = null;
@@ -283,7 +283,7 @@ $(function () {
   }
 
   function loadGame(data) {
-    console.log(data);
+    console.log('load', data);
     flags = data.flags;
     Object.keys(NPC_DATA).forEach(UTILS.refreshNpcOnMap);
     Object.keys(flags.visited || {}).forEach(visitMinimap);
