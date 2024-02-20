@@ -55,7 +55,7 @@ const [MAP_DATA, NPC_DATA] = function () {
             'สวัสดี ข้าคือช่างก่อสร้างแห่งปราสาทหลังนี้',
           ]);
         case 'action':
-          return R(1, true, true, [
+          return R(0, true, true, [
             'ขอโทษด้วย ตอนนี้เลื่อยข้าเสีย ตัดไม้ไม่ได้',
           ]);
         case 'sword':
@@ -65,7 +65,7 @@ const [MAP_DATA, NPC_DATA] = function () {
             'dwarfIdle', 'dwarfWorking', 'timeTravelerFirst',
             'bridgeFrame', 'bridge',
           ].map(utils.refreshNpcOnMap);
-          return R(2, false, false, [
+          return R(1, false, false, [
             'โอ้! ดาบนี้ตัดไม้ได้ดีจริง ๆ เดี๋ยวข้าเริ่มงานเลยแล้วกัน',
           ]);
       }
@@ -122,9 +122,9 @@ const [MAP_DATA, NPC_DATA] = function () {
     name: 'คนแคระ',
     actionText: '',
     itemText: XXX,
-    mapStates: {'swordGiven': 'appear'},
+    mapStates: {'swordGiven': 'appear map-dwarf-1'},
     content: function (op, flags, utils) {
-      return R(0, false, false, [
+      return R(1, false, false, [
         'รอหน่อยนะ คงใช้เวลาก่อสร้างสักพัก',
       ]);
     },
