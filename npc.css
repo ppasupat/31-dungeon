@@ -120,6 +120,10 @@
   transform: scale(0.7);
 }
 
+.map-timeTravelerCongrats {
+  display: none;
+}
+
 /* ################################ */
 /* NPC encounter */
 

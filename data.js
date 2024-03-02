@@ -16,7 +16,7 @@ const [MAP_DATA, NPC_DATA] = function () {
   const XXX = (x => '???');
   const GIVE = (x => 'ให้ <b>' + (itemNames[x] || '???') + '</b>');
   const USE = (x => 'ใช้ <b>' + (itemNames[x] || '???') + '</b>');
-  const GRAY = '#667', BROWN = '#741', PURPLE = '#606';
+  const GRAY = '#222', PURPLE = '#dad', GREEN = '#add';
 
   function escapeHtml(x) {
     return x.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -36,7 +36,7 @@ const [MAP_DATA, NPC_DATA] = function () {
 
   // p0
   map_data.p0 = {
-    pid: 'p0', row: 0, col: 0,
+    pid: 'p0', row: 0, col: 0, color: PURPLE,
     arrows: {'e': 'p1'},
     mainNpc: 'dwarfIdle',
   };
@@ -74,7 +74,7 @@ const [MAP_DATA, NPC_DATA] = function () {
 
   // f0 (start)
   map_data.f0 = {
-    pid: 'f0', row: 0, col: 0,
+    pid: 'f0', row: 0, col: 0, color: GREEN,
     arrows: {'e': 'f1'},
     hideArrows: {'tutorialDone': 'e'},
     mainNpc: 'fairy',
@@ -111,7 +111,7 @@ const [MAP_DATA, NPC_DATA] = function () {
 
   // p1
   map_data.p1 = {
-    pid: 'p1', row: 0, col: 1,
+    pid: 'p1', row: 0, col: 1, color: PURPLE,
     arrows: {'w': 'p0'},
     mainNpc: 'dwarfWorking',
   };
@@ -132,7 +132,7 @@ const [MAP_DATA, NPC_DATA] = function () {
 
   // f1
   map_data.f1 = {
-    pid: 'f1', row: 0, col: 1,
+    pid: 'f1', row: 0, col: 1, color: GREEN,
     arrows: {'w': 'f0', 's': 'f3'},
     hideArrows: {'swordGiven': 's'},
     mainNpc: 'timeTravelerFirst',
@@ -164,7 +164,7 @@ const [MAP_DATA, NPC_DATA] = function () {
 
   // p3
   map_data.p3 = {
-    pid: 'p3', row: 1, col: 1,
+    pid: 'p3', row: 1, col: 1, color: PURPLE,
     arrows: {'s': 'p5'},
   };
 
@@ -176,7 +176,7 @@ const [MAP_DATA, NPC_DATA] = function () {
 
   // f3
   map_data.f3 = {
-    pid: 'f3', row: 1, col: 1,
+    pid: 'f3', row: 1, col: 1, color: GREEN,
     arrows: {'n': 'f1', 's': 'f5'},
   };
 
@@ -191,7 +191,7 @@ const [MAP_DATA, NPC_DATA] = function () {
 
   // p4
   map_data.p4 = {
-    pid: 'p4', row: 2, col: 0,
+    pid: 'p4', row: 2, col: 0, color: PURPLE,
     arrows: {'e': 'p5'},
     mainNpc: 'aristocrat',
   };
@@ -217,7 +217,7 @@ const [MAP_DATA, NPC_DATA] = function () {
 
   // f4
   map_data.f4 = {
-    pid: 'f4', row: 2, col: 0,
+    pid: 'f4', row: 2, col: 0, color: GRAY,
     arrows: {},
     mainNpc: 'safe',
   };
@@ -273,13 +273,13 @@ const [MAP_DATA, NPC_DATA] = function () {
 
   // p5
   map_data.p5 = {
-    pid: 'p5', row: 2, col: 1,
+    pid: 'p5', row: 2, col: 1, color: PURPLE,
     arrows: {'n': 'p3', 'w': 'p4', 's': 'p7'},
   };
 
   // f5
   map_data.f5 = {
-    pid: 'f5', row: 2, col: 1,
+    pid: 'f5', row: 2, col: 1, color: GREEN,
     arrows: {'n': 'f3', 's': 'f7'},
   };
 
@@ -288,7 +288,7 @@ const [MAP_DATA, NPC_DATA] = function () {
 
   // p7
   map_data.p7 = {
-    pid: 'p7', row: 3, col: 1,
+    pid: 'p7', row: 3, col: 1, color: PURPLE,
     arrows: {'n': 'p5', 's': 'p9'},
     mainNpc: 'plotPast',
   }
@@ -352,7 +352,7 @@ const [MAP_DATA, NPC_DATA] = function () {
 
   // f7
   map_data.f7 = {
-    pid: 'f7', row: 3, col: 1,
+    pid: 'f7', row: 3, col: 1, color: GREEN,
     arrows: {'n': 'f5', 's': 'f9'},
     mainNpc: 'plotFuture',
   }
@@ -431,13 +431,13 @@ const [MAP_DATA, NPC_DATA] = function () {
 
   // p8
   map_data.p8 = {
-    pid: 'p8', row: 4, col: 0,
+    pid: 'p8', row: 4, col: 0, color: PURPLE,
     arrows: {'e': 'p9'},
   };
 
   // f8
   map_data.f8 = {
-    pid: 'f8', row: 4, col: 0,
+    pid: 'f8', row: 4, col: 0, color: GREEN,
     arrows: {'e': 'f9'},
     mainNpc: 'sorcerer',
   };
@@ -506,7 +506,7 @@ const [MAP_DATA, NPC_DATA] = function () {
 
   // p9
   map_data.p9 = {
-    pid: 'p9', row: 4, col: 1,
+    pid: 'p9', row: 4, col: 1, color: PURPLE,
     arrows: {'w': 'p8', 'n': 'p7'},
     mainNpc: 'throne',
   };
@@ -559,7 +559,7 @@ const [MAP_DATA, NPC_DATA] = function () {
 
   // f9
   map_data.f9 = {
-    pid: 'f9', row: 4, col: 1,
+    pid: 'f9', row: 4, col: 1, color: GREEN,
     arrows: {'w': 'f8', 'n': 'f7'},
     mainNpc: 'boss',
   };
@@ -614,7 +614,7 @@ const [MAP_DATA, NPC_DATA] = function () {
   // Win screen
 
   map_data.fx = {
-    pid: 'fx', row: 4, col: 2,
+    pid: 'fx', row: 4, col: 2, color: GREEN,
     arrows: {},
   };
 

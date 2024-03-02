@@ -121,10 +121,50 @@ $(function () {
   // ################################
   // Minimap
 
+  const MINIMAP_ROW_HEIGHT = 20, MINIMAP_COL_WIDTH = 30,
+    MINIMAP_TOP_OFFSET = 12, MINIMAP_LEFT_OFFSET = 15,
+    YELLOW = '#fea';
+
+  function getMiniMapCoords(pid) {
+    return {
+      x: (MINIMAP_LEFT_OFFSET + MAP_DATA[pid].col * MINIMAP_COL_WIDTH
+         + (pid.charAt(0) === 'p' ? 0 : MINIMAP_COL_WIDTH * 2.5)),
+      y: MINIMAP_TOP_OFFSET + MAP_DATA[pid].row * MINIMAP_ROW_HEIGHT,
+    };
+  }
+
+  // Generate a tag in SVG namespace
+  function S(tag, attr) {
+    return $(document.createElementNS(
+      "http://www.w3.org/2000/svg", tag.replace(/[<>]/g, '')))
+      .attr(attr || {});
+  }
+
   function setupMinimap() {
+    S('rect', {
+      id: 'mm-player',
+      width: MINIMAP_COL_WIDTH - 4,
+      height: MINIMAP_ROW_HEIGHT - 4,
+      fill: 'none',
+      stroke: '#f55',
+      'stroke-width': 4,
+    }).appendTo('#minimap-avatars');
+    Object.keys(MAP_DATA).forEach(pid => {
+      let coords = getMiniMapCoords(pid);
+      console.log(pid, coords);
+      S('rect', {
+        x: coords.x, y: coords.y,
+        width: MINIMAP_COL_WIDTH - 2,
+        height: MINIMAP_ROW_HEIGHT - 2,
+        fill: MAP_DATA[pid].color,
+      }).appendTo('#minimap-nodes').addClass('mm-' + pid).hide();
+    });
   }
 
   function visitMinimap(pid) {
+    $('.mm-' + pid).show();
+    let coords = getMiniMapCoords(pid);
+    $('#mm-player').attr({x: coords.x + 1, y: coords.y + 1});
   }
 
   // ################################
