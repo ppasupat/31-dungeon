@@ -353,7 +353,8 @@ $(function () {
   $(window).resize(resizeScreen);
 
   const imageList = [
-    'img/map.png',
+    'img/map-past.png',
+    'img/map-future.png',
     'img/exclaim.png',
     'img/arrow.png',
     'img/sheet.png',

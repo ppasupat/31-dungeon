@@ -171,33 +171,55 @@ div.scene {
 /* ################################ */
 /* map */
 
-#map {
+#map-past {
   position: absolute;
-  width: 2500px; height: 2000px; left: 0; top: -1260px;
-  background: url('img/map.png');
+  width: 1000px; height: 2000px; left: 0; top: 0;
+  background: url('img/map-past.png');
+}
+#time-travel-wrapper {
+  position: absolute;
+  left: -100px; top: 0; width: 700px; bottom: 0;
+  transition: width 500ms linear;
+}
+#map-view-future {
+  position: absolute;
+  left: 100px; top: 0; right: 100px; bottom: 0;
+  overflow: hidden;
+}
+#time-travel-divider {
+  position: absolute;
+  right: 0; top: 0; bottom: 0; width: 200px;
+  background: #ff00ff88;
+}
+#map-future {
+  position: absolute;
+  width: 1000px; height: 2000px; left: 0; top: 0;
+  background: url('img/map-future.png');
+}
+#map-pane.walking #map-past {
   transition: left 250ms linear, top 250ms linear;
 }
 
 .arrow {
   position: absolute; display: none;
   width: 160px; height: 140px;
-  background: url('img/arrow.png') 15px 20px no-repeat;
+  background: url('img/arrow.png') 5px 20px no-repeat;
   cursor: pointer;
 }
 
 #arrow-n {
-  left: 180px; top: -33px;
+  left: 180px; top: -50px;
   transform: rotate(-90deg);
 }
 #arrow-w {
-  left: -40px; top: 130px;
+  left: -55px; top: 130px;
   transform: rotate(180deg);
 }
 #arrow-e {
-  right: -40px; top: 130px;
+  right: -55px; top: 130px;
 }
 #arrow-s {
-  left: 180px; bottom: -33px;
+  left: 180px; bottom: -50px;
   transform: rotate(90deg);
 }
 

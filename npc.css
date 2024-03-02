@@ -31,7 +31,7 @@
 
 .map-dwarfWorking {
   top: 80px;
-  left: 620px;
+  left: 720px;
   display: none;
 }
 .map-dwarfWorking > .msp {
@@ -81,16 +81,16 @@
 }
 
 .map-plotPast {
-  top: 1350px;
-  left: 700px;
+  top: 1330px;
+  left: 710px;
 }
 .map-plotPast > .msp {
   transform: scale(0.5);
 }
 
 .map-plotFuture {
-  top: 1350px;
-  left: 1700px;
+  top: 1330px;
+  left: 1710px;
 }
 .map-plotFuture > .msp {
   transform: scale(0.5);
@@ -105,19 +105,19 @@
 }
 
 .map-throne {
-  top: 1700px;
-  left: 600px;
+  top: 1750px;
+  left: 680px;
 }
 .map-throne > .msp {
-  transform: scale(0.5);
+  transform: scale(0.7);
 }
 
 .map-boss {
-  top: 1700px;
-  left: 1600px;
+  top: 1750px;
+  left: 1680px;
 }
 .map-boss > .msp {
-  transform: scale(0.5);
+  transform: scale(0.7);
 }
 
 /* ################################ */
