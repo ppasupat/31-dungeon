@@ -20,22 +20,68 @@ $(function () {
     };
   }
 
-  function moveMap(pid) {
-    if (currentPid === pid) {
-      UTILS.showArrows();
-      return;
-    }
+  function pidToMapIdName(pid) {
+    return pid.charAt(0) === 'p' ? '#map-past' : '#map-future';
+  }
+
+  let isTransitioning = false;
+
+  function walkTo(pid) {
+    if (isTransitioning || currentPid === pid) return;
+    isTransitioning = true;
     currentPid = pid;
+    $('#map-pane').addClass('walking');
+    $('.arrow').hide();
     let coords = getMapCoords(pid);
-    $('#map').css({
+    // This will trigger the transition
+    $('#map-past, #map-future').css({
       top: -(coords.top) + 'px',
       left: -(coords.left) + 'px',
     });
-    $('.arrow').hide();
-    if (flags.visited === undefined) flags.visited = {};
-    flags.visited[pid] = 1;
-    visitMinimap(pid);
   }
+
+  function timeTravelTo(pid) {
+    if (isTransitioning || currentPid == pid) return;
+    isTransitioning = true;
+    currentPid = pid;
+    $('#map-pane').addClass('walking');
+    $('.arrow').hide();
+    // This will trigger the transition
+    $('#time-travel-wrapper').css({
+      width: pid.charAt(0) === 'p' ? '100px' : '700px',
+    });
+  }
+
+  function warpTo(pid) {
+    currentPid = pid;
+    let coords = getMapCoords(pid);
+    // This will NOT trigger the transition
+    $('#map-past, #map-future').css({
+      top: -(coords.top) + 'px',
+      left: -(coords.left) + 'px',
+    });
+    $('#time-travel-wrapper').css({
+      width: pid.charAt(0) === 'p' ? '100px' : '700px',
+    });
+    finalizeTransition();
+  }
+
+  function finalizeTransition() {
+    isTransitioning = false;
+    $('#map-pane').removeClass('walking');
+    UTILS.showArrows();
+    if (flags.visited === undefined) flags.visited = {};
+    flags.visited[currentPid] = 1;
+    visitMinimap(currentPid);
+    if (currentPid.charAt(0) === 'p') {
+      $('#timemachine').addClass('time-past').removeClass('time-future');
+    } else {
+      $('#timemachine').addClass('time-future').removeClass('time-past');
+    }
+    $('#timemachine').removeClass('time-dimmed');
+  }
+
+  $('#map-past, #time-travel-wrapper').on('transitionend', finalizeTransition);
 
   UTILS.showArrows = function () {
     Object.keys(MAP_DATA[currentPid].arrows).forEach(
@@ -48,11 +94,9 @@ $(function () {
     showExclaim();
   }
 
-  $('#map').on('transitionend', UTILS.showArrows);
-
   $('.arrow').click(e => {
     if (!$('#encounter').hasClass('hidden')) return;
-    moveMap(MAP_DATA[currentPid].arrows[e.target.dataset.dir]);
+    walkTo(MAP_DATA[currentPid].arrows[e.target.dataset.dir]);
   });
 
   UTILS.enableTimeMachine = function () {
@@ -64,15 +108,13 @@ $(function () {
     }
   }
 
-  // TODO: Transition for time travel
   $('#timemachine').click(e => {
     if ($('#timemachine').hasClass('time-dimmed')) return;
+    $('#timemachine').addClass('time-dimmed');
     if ($('#timemachine').hasClass('time-past')) {
-      $('#timemachine').addClass('time-future').removeClass('time-past');
-      moveMap('f' + currentPid.slice(1));
+      timeTravelTo('f' + currentPid.slice(1));
     } else {
-      $('#timemachine').addClass('time-past').removeClass('time-future');
-      moveMap('p' + currentPid.slice(1));
+      timeTravelTo('p' + currentPid.slice(1));
     }
   });
 
@@ -95,7 +137,7 @@ $(function () {
       let corrds = getMapCoords(npc.loc);
       let npcDiv = $('<div class=map-npc>').attr({
         'data-nid': npc.nid,
-      }).addClass('map-' + npc.nid).appendTo('#map');
+      }).addClass('map-' + npc.nid).appendTo(pidToMapIdName(npc.loc));
       npcDiv.append($('<div class=msp>'));
       if (npc.nidAlias) npcDiv.addClass('map-' + npc.nidAlias);
       if (npc.cosmetic) npcDiv.addClass('cosmetic');
@@ -121,7 +163,7 @@ $(function () {
     }
   }
 
-  $('#map').on('click', '.map-npc', function (e) {
+  $('#map-past, #map-future').on('click', '.map-npc', function (e) {
     if ($(this).hasClass('cosmetic')) return;
     showEncounter(this.dataset.nid);
   });
@@ -255,8 +297,8 @@ $(function () {
     let showWinSceneInner = function () {
       $('#scene-cover').off('transitionend', showWinSceneInner);
       $('#btn-leave-wrapper').hide();
+      warpTo('fx');
       showEncounter('timeTravelerCongrats');
-      moveMap('px');
       $('#scene-cover').addClass('hidden');
     };
     $('#scene-cover').on('transitionend', showWinSceneInner).removeClass('hidden');
@@ -274,7 +316,7 @@ $(function () {
     if (savedData !== undefined) {
       loadGame(savedData);
     } else {
-      moveMap('f0');
+      warpTo('f0');
     }
     UTILS.showArrows();
     $('#scene-cover').addClass('hidden');
@@ -312,7 +354,7 @@ $(function () {
     Object.keys(NPC_DATA).forEach(UTILS.refreshNpcOnMap);
     Object.keys(flags.visited || {}).forEach(visitMinimap);
     data.items.forEach(UTILS.addItem);
-    moveMap(data.pid);
+    warpTo(data.pid);
     if (flags.timeMachineTaken) UTILS.enableTimeMachine();
     if (flags.gameWon) showWinScene();
   }

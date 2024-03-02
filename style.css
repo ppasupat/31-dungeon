@@ -179,16 +179,15 @@ div.scene {
 #time-travel-wrapper {
   position: absolute;
   left: -100px; top: 0; width: 700px; bottom: 0;
-  transition: width 500ms linear;
 }
 #map-view-future {
   position: absolute;
-  left: 100px; top: 0; right: 100px; bottom: 0;
+  left: 100px; top: 0; right: 0; bottom: 0;
   overflow: hidden;
 }
 #time-travel-divider {
   position: absolute;
-  right: 0; top: 0; bottom: 0; width: 200px;
+  right: 0; top: 0; bottom: 0; width: 100px;
   background: #ff00ff88;
 }
 #map-future {
@@ -196,8 +195,11 @@ div.scene {
   width: 1000px; height: 2000px; left: 0; top: 0;
   background: url('img/map-future.png');
 }
-#map-pane.walking #map-past {
+#map-pane.walking #map-past, #map-pane.walking #map-future {
   transition: left 250ms linear, top 250ms linear;
+}
+#map-pane.walking #time-travel-wrapper {
+  transition: width 500ms linear;
 }
 
 .arrow {

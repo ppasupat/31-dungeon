@@ -74,7 +74,7 @@ const [MAP_DATA, NPC_DATA] = function () {
 
   // f0 (start)
   map_data.f0 = {
-    pid: 'f0', row: 0, col: 2,
+    pid: 'f0', row: 0, col: 0,
     arrows: {'e': 'f1'},
     hideArrows: {'tutorialDone': 'e'},
     mainNpc: 'fairy',
@@ -132,7 +132,7 @@ const [MAP_DATA, NPC_DATA] = function () {
 
   // f1
   map_data.f1 = {
-    pid: 'f1', row: 0, col: 3,
+    pid: 'f1', row: 0, col: 1,
     arrows: {'w': 'f0', 's': 'f3'},
     hideArrows: {'swordGiven': 's'},
     mainNpc: 'timeTravelerFirst',
@@ -176,7 +176,7 @@ const [MAP_DATA, NPC_DATA] = function () {
 
   // f3
   map_data.f3 = {
-    pid: 'f3', row: 1, col: 3,
+    pid: 'f3', row: 1, col: 1,
     arrows: {'n': 'f1', 's': 'f5'},
   };
 
@@ -217,7 +217,7 @@ const [MAP_DATA, NPC_DATA] = function () {
 
   // f4
   map_data.f4 = {
-    pid: 'f4', row: 2, col: 2,
+    pid: 'f4', row: 2, col: 0,
     arrows: {},
     mainNpc: 'safe',
   };
@@ -279,7 +279,7 @@ const [MAP_DATA, NPC_DATA] = function () {
 
   // f5
   map_data.f5 = {
-    pid: 'f5', row: 2, col: 3,
+    pid: 'f5', row: 2, col: 1,
     arrows: {'n': 'f3', 's': 'f7'},
   };
 
@@ -352,7 +352,7 @@ const [MAP_DATA, NPC_DATA] = function () {
 
   // f7
   map_data.f7 = {
-    pid: 'f7', row: 3, col: 3,
+    pid: 'f7', row: 3, col: 1,
     arrows: {'n': 'f5', 's': 'f9'},
     mainNpc: 'plotFuture',
   }
@@ -437,7 +437,7 @@ const [MAP_DATA, NPC_DATA] = function () {
 
   // f8
   map_data.f8 = {
-    pid: 'f8', row: 4, col: 2,
+    pid: 'f8', row: 4, col: 0,
     arrows: {'e': 'f9'},
     mainNpc: 'sorcerer',
   };
@@ -559,7 +559,7 @@ const [MAP_DATA, NPC_DATA] = function () {
 
   // f9
   map_data.f9 = {
-    pid: 'f9', row: 4, col: 3,
+    pid: 'f9', row: 4, col: 1,
     arrows: {'w': 'f8', 'n': 'f7'},
     mainNpc: 'boss',
   };
@@ -613,8 +613,8 @@ const [MAP_DATA, NPC_DATA] = function () {
   // ################################
   // Win screen
 
-  map_data.px = {
-    pid: 'px', row: 4, col: 4,
+  map_data.fx = {
+    pid: 'fx', row: 4, col: 2,
     arrows: {},
   };
 
@@ -630,8 +630,8 @@ const [MAP_DATA, NPC_DATA] = function () {
   ];
 
   npc_data.timeTravelerCongrats = {
-    nid: 'timeTravelerCongrats', loc: 'px',
-    nidAlias: 'timeTravler',
+    nid: 'timeTravelerCongrats', loc: 'fx',
+    nidAlias: 'timeTraveler',
     name: '???',
     actionText: congratsTexts[0].q,
     itemText: XXX,

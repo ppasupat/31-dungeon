@@ -23,7 +23,7 @@
 
 .map-fairy {
   top: 130px;
-  left: 1270px;
+  left: 270px;
 }
 .map-fairy > .msp {
   transform: scale(0.5);
@@ -40,7 +40,7 @@
 
 .map-timeTravelerFirst {
   top: 80px;
-  left: 1830px;
+  left: 830px;
 }
 .map-timeTravelerFirst > .msp {
   transform: scale(0.5);
@@ -57,7 +57,7 @@
 
 .map-bridge {
   top: 250px;
-  left: 1700px;
+  left: 700px;
   display: none;
 }
 .map-bridge > .msp {
@@ -74,7 +74,7 @@
 
 .map-safe {
   top: 900px;
-  left: 1100px;
+  left: 100px;
 }
 .map-safe > .msp {
   transform: scale(0.5);
@@ -90,7 +90,7 @@
 
 .map-plotFuture {
   top: 1330px;
-  left: 1710px;
+  left: 710px;
 }
 .map-plotFuture > .msp {
   transform: scale(0.5);
@@ -98,7 +98,7 @@
 
 .map-sorcerer {
   top: 1700px;
-  left: 1100px;
+  left: 100px;
 }
 .map-sorcerer > .msp {
   transform: scale(0.5);
@@ -114,7 +114,7 @@
 
 .map-boss {
   top: 1750px;
-  left: 1680px;
+  left: 680px;
 }
 .map-boss > .msp {
   transform: scale(0.7);
