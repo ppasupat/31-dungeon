@@ -641,11 +641,10 @@ const [MAP_DATA, NPC_DATA] = function () {
           ];
           congratsState += 1;
           if (congratsState === congratsTexts.length) {
-            return R(0, false, false, answer);
-          } else {
-            utils.changeActionText(congratsTexts[congratsState].q);
-            return R(0, true, false, answer);
+            congratsState = 0;
           }
+          utils.changeActionText(congratsTexts[congratsState].q);
+          return R(0, true, false, answer);
       };
     },
   };

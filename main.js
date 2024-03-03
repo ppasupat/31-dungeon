@@ -336,6 +336,8 @@ $(function () {
 
   function showWinScene() {
     let showWinSceneInner = function () {
+      // Make sure the minimap is complete
+      Object.keys(MAP_DATA).forEach(visitMinimap);
       $('#scene-cover').off('transitionend', showWinSceneInner);
       $('#btn-leave-wrapper').hide();
       warpTo('fx');
