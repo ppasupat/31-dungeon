@@ -1,17 +1,17 @@
 .npc-aristocrat-0, .map-aristocrat > .msp {
-  background-position: -486px -1290px;
+  background-position: -486px -968px;
   width: 150px; height: 312px;
 }
 .npc-boss-0, .map-boss > .msp {
-  background-position: -728px -968px;
+  background-position: -486px -646px;
   width: 240px; height: 320px;
 }
 .npc-boss-1, .map-boss.map-boss-1 > .msp {
-  background-position: -244px -968px;
+  background-position: -728px -646px;
   width: 240px; height: 320px;
 }
 .npc-boss-2, .map-boss.map-boss-2 > .msp {
-  background-position: -486px -968px;
+  background-position: -728px -968px;
   width: 240px; height: 320px;
 }
 .npc-bridge-0, .map-bridge > .msp {
@@ -22,67 +22,75 @@
   background-position: -199px -2px;
   width: 195px; height: 330px;
 }
+.npc-chest-0, .map-chest > .msp {
+  background-position: -644px -1595px;
+  width: 50px; height: 50px;
+}
+.npc-chest-1, .map-chest.map-chest-1 > .msp {
+  background-position: -880px -2px;
+  width: 240px; height: 261px;
+}
 .npc-dwarf-0, .map-dwarf > .msp {
-  background-position: -451px -1604px;
+  background-position: -426px -1595px;
   width: 216px; height: 284px;
 }
 .npc-dwarf-1, .map-dwarf.map-dwarf-1 > .msp {
-  background-position: -669px -1579px;
+  background-position: -2px -1603px;
   width: 216px; height: 284px;
 }
 .npc-fairy-0, .map-fairy > .msp {
-  background-position: -214px -1603px;
+  background-position: -698px -1290px;
   width: 235px; height: 287px;
 }
 .npc-fairy-1, .map-fairy.map-fairy-1 > .msp {
-  background-position: -638px -1290px;
+  background-position: -698px -1579px;
   width: 235px; height: 287px;
 }
 .npc-plot-0, .map-plot > .msp {
-  background-position: -2px -978px;
+  background-position: -486px -1282px;
   width: 210px; height: 311px;
 }
 .npc-plot-1, .map-plot.map-plot-1 > .msp {
-  background-position: -214px -1290px;
+  background-position: -2px -978px;
   width: 210px; height: 311px;
 }
 .npc-plot-2, .map-plot.map-plot-2 > .msp {
-  background-position: -2px -1291px;
+  background-position: -214px -1290px;
   width: 210px; height: 311px;
 }
-.npc-safe-0, .map-safe > .msp {
+.npc-sorcerer-0, .map-sorcerer > .msp {
   background-position: -638px -2px;
   width: 240px; height: 320px;
 }
-.npc-safe-1, .map-safe.map-safe-1 > .msp {
+.npc-sorcerer-1, .map-sorcerer.map-sorcerer-1 > .msp {
   background-position: -638px -324px;
   width: 240px; height: 320px;
 }
-.npc-sorcerer-0, .map-sorcerer > .msp {
+.npc-sorcerer-2, .map-sorcerer.map-sorcerer-2 > .msp {
   background-position: -396px -324px;
   width: 240px; height: 320px;
 }
-.npc-sorcerer-1, .map-sorcerer.map-sorcerer-1 > .msp {
+.npc-sorcerer-3, .map-sorcerer.map-sorcerer-3 > .msp {
   background-position: -2px -334px;
   width: 240px; height: 320px;
 }
-.npc-sorcerer-2, .map-sorcerer.map-sorcerer-2 > .msp {
+.npc-throne-0, .map-throne > .msp {
   background-position: -244px -646px;
   width: 240px; height: 320px;
 }
-.npc-sorcerer-3, .map-sorcerer.map-sorcerer-3 > .msp {
-  background-position: -2px -656px;
-  width: 240px; height: 320px;
-}
-.npc-throne-0, .map-throne > .msp {
-  background-position: -486px -646px;
-  width: 240px; height: 320px;
-}
 .npc-throne-1, .map-throne.map-throne-1 > .msp {
-  background-position: -728px -646px;
+  background-position: -2px -656px;
   width: 240px; height: 320px;
 }
 .npc-timeTraveler-0, .map-timeTraveler > .msp {
   background-position: -396px -2px;
+  width: 240px; height: 320px;
+}
+.npc-trash-0, .map-trash > .msp {
+  background-position: -644px -1647px;
+  width: 50px; height: 50px;
+}
+.npc-trash-1, .map-trash.map-trash-1 > .msp {
+  background-position: -244px -968px;
   width: 240px; height: 320px;
 }

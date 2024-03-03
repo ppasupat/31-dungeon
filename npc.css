@@ -72,12 +72,20 @@
   transform: scale(0.5);
 }
 
-.map-safe {
-  top: 900px;
-  left: 100px;
+.map-chest {
+  top: 1100px;
+  left: 280px;
 }
-.map-safe > .msp {
-  transform: scale(0.5);
+.map-chest > .msp {
+  transform: scale(1.0);
+}
+.map-trash1 { top: 840px; left: 40px; }
+.map-trash2 { top: 950px; left: 190px; }
+.map-trash3 { top: 1040px; left: 50px; }
+.map-trash4 { top: 840px; left: 330px; }
+.map-trash5 { top: 1020px; left: 360px; }
+.map-trash > .msp {
+  transform: scale(2.5);
 }
 
 .map-plotPast {

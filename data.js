@@ -219,45 +219,25 @@ const [MAP_DATA, NPC_DATA] = function () {
   map_data.f4 = {
     pid: 'f4', row: 2, col: 0, color: GRAY,
     arrows: {},
-    mainNpc: 'safe',
   };
 
-  function initSafeLock(successCallback) {
-    $('#npc-extra').empty();
-    $('<button>').text('OPEN').click(successCallback).appendTo('#npc-extra');
-  }
-
-  npc_data.safe = {
-    nid: 'safe', loc: 'f4',
-    name: 'ตู้เซฟ',
+  npc_data.chest = {
+    nid: 'chest', loc: 'f4',
+    name: 'หีบสมบัติ',
     actionText: 'จิ๊กของ',
     itemText: XXX,
-    mapStates: {'safeOpen': 'map-safe-1'},
     content: function (op, flags, utils) {
       switch (op) {
         case 'enter':
-          initSafeLock(function () {
-            flags.safeOpen = 1;
-            utils.refreshNpcOnMap('safe');
-            utils.displayEncounterContent(
-              R(1, true, false, [
-                'ประตูเซฟเปิดออกแล้ว',
-              ])
-            );
-          });
-          return R(flags.safeOpen ? 1 : 0, true, false, [
-            'ตู้เซฟ ดูแข็งแรง',
+          return R(1, true, false, [
+            'มี <b>ใบชา</b> อยู่ในหีบ',
           ]);
         case 'action':
-          if (!flags.safeOpen) {
-            return R(0, true, false, [
-              'ตู้เซฟปิดอยู่ ต้องเปิดมันก่อน',
-            ]);
-          } else if (!flags.teaTaken) {
+          if (!flags.teaTaken) {
             utils.addItem('tea');
             flags.teaTaken = 1;
             return R(1, true, false, [
-              'คุณหยิบ <b>ใบชา</b> จากตู้เซฟ',
+              'คุณหยิบ <b>ใบชา</b> มาเล็กน้อย',
             ]);
           } else {
             return R(1, true, false, [
@@ -267,6 +247,21 @@ const [MAP_DATA, NPC_DATA] = function () {
       }
     }
   };
+
+  [1, 2, 3, 4, 5].forEach(function (i) {
+    npc_data['trash' + i] = {
+      nid: 'trash' + i, loc: 'f4',
+      nidAlias: 'trash',
+      name: 'ของจิปาถะ',
+      actionText: '',
+      itemText: XXX,
+      content: function (op, flags, utils) {
+        return R(1, false, false, [
+          'มีแต่ของไม่มีประโยชน์',
+        ]);
+      },
+    };
+  });
 
   // ################################
   // Room 5

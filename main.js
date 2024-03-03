@@ -54,6 +54,7 @@ $(function () {
 
   function warpTo(pid) {
     currentPid = pid;
+    $('.arrow').hide();
     let coords = getMapCoords(pid);
     // This will NOT trigger the transition
     $('#map-past, #map-future').css({
