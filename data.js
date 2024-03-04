@@ -442,6 +442,7 @@ const [MAP_DATA, NPC_DATA] = function () {
     name: 'จอมเวทย์',
     actionText: 'เวทศักดิ์สิทธิ์ใช้งัย?',
     itemText: GIVE,
+    mapStates: {'lemonTeaMade': 'map-sorcerer-3'},
     content: function (op, flags, utils) {
       let mood = function () {
         return 2 * (flags.lemonGiven ? 1 : 0) + (flags.teaGiven ? 1 : 0)
@@ -470,6 +471,8 @@ const [MAP_DATA, NPC_DATA] = function () {
               '<b>มะนาว</b>รึ?<br>ก็ดีนะ แต่กินมะนาวเฉย ๆ มันเปรี้ยวเกิน',
             ]);
           } else {
+            flags.lemonTeaMade = 1;
+            utils.refreshNpcOnMap('sorcerer');
             utils.addItem('spell');
             return R(3, true, false, [
               'ชามะนาวได้ผลดีจริง ๆ ข้าจะให้ <b>เวทศักดิ์สิทธิ์</b> แก่เจ้า'
@@ -483,6 +486,8 @@ const [MAP_DATA, NPC_DATA] = function () {
               '<b>ชา</b>รึ?<br>ก็ดีนะ แต่กินชาเฉย ๆ มันขมเกิน',
             ]);
           } else {
+            flags.lemonTeaMade = 1;
+            utils.refreshNpcOnMap('sorcerer');
             utils.addItem('spell');
             return R(3, true, false, [
               'ชามะนาวได้ผลดีจริง ๆ ข้าจะให้ <b>เวทศักดิ์สิทธิ์</b> แก่เจ้า',
@@ -614,7 +619,7 @@ const [MAP_DATA, NPC_DATA] = function () {
   };
 
   // Don't persist the states
-  let congratsState = 0;
+  let congratsState = 0, congratsMood = 1;
   let congratsTexts = [
     {q: 'เธอเป็นใคร?', a: '... ฉันคือเธอจากโลกอนาคต ...'},
     {q: 'เธอมาที่นี่ทำไม?', a: '... ฉันมาช่วยเธอปราบจอมมาร ...'},
@@ -641,10 +646,11 @@ const [MAP_DATA, NPC_DATA] = function () {
           ];
           congratsState += 1;
           if (congratsState === congratsTexts.length) {
+            congratsMood = 2;
             congratsState = 0;
           }
           utils.changeActionText(congratsTexts[congratsState].q);
-          return R(0, true, false, answer);
+          return R(congratsMood, true, false, answer);
       };
     },
   };
