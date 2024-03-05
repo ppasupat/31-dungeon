@@ -3,15 +3,15 @@
   width: 150px; height: 312px;
 }
 .npc-boss-0, .map-boss > .msp {
-  background-position: -608px -324px;
+  background-position: -396px -2px;
   width: 210px; height: 320px;
 }
 .npc-boss-1, .map-boss.map-boss-1 > .msp {
-  background-position: -396px -324px;
+  background-position: -608px -2px;
   width: 210px; height: 320px;
 }
 .npc-boss-2, .map-boss.map-boss-2 > .msp {
-  background-position: -2px -334px;
+  background-position: -608px -324px;
   width: 210px; height: 320px;
 }
 .npc-bridge-0, .map-bridge > .msp {
@@ -75,11 +75,11 @@
   width: 221px; height: 296px;
 }
 .npc-throne-0, .map-throne > .msp {
-  background-position: -396px -2px;
+  background-position: -396px -324px;
   width: 210px; height: 320px;
 }
 .npc-throne-1, .map-throne.map-throne-1 > .msp {
-  background-position: -608px -2px;
+  background-position: -2px -334px;
   width: 210px; height: 320px;
 }
 .npc-timeTraveler-0, .map-timeTraveler > .msp {
