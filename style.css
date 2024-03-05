@@ -447,12 +447,10 @@ div.scene {
 .vertical-screen #timemachine { left: 93px; top: 88px; }
 
 #timemachinesp {
-  background-image: url('img/timemachine.png');
+  background-image: url('img/sheet.png');
   position: absolute; top: 0; left: 0; width: 360px; height: 160px;
   transform-origin: top left;
   transform: scale(0.5);
 }
-#timemachine.time-past > #timemachinesp { background-position: 0 -160px; }
-#timemachine.time-future > #timemachinesp { background-position: 0 0; }
 #timemachine.time-blank { display: none; }
 #timemachine.time-dimmed { opacity: 0.5; cursor: auto; }

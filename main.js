@@ -75,9 +75,9 @@ $(function () {
     flags.visited[currentPid] = 1;
     visitMinimap(currentPid);
     if (currentPid.charAt(0) === 'p') {
-      $('#timemachine').addClass('time-past').removeClass('time-future');
+      $('#timemachinesp').addClass('time-past').removeClass('time-future');
     } else {
-      $('#timemachine').addClass('time-future').removeClass('time-past');
+      $('#timemachinesp').addClass('time-future').removeClass('time-past');
     }
     $('#timemachine').removeClass('time-dimmed');
   }
@@ -103,16 +103,16 @@ $(function () {
   UTILS.enableTimeMachine = function () {
     $('#timemachine').removeClass('time-blank');
     if (currentPid.charAt(0) === 'f') {
-      $('#timemachine').addClass('time-future');
+      $('#timemachinesp').addClass('time-future');
     } else {
-      $('#timemachine').addClass('time-past');
+      $('#timemachinesp').addClass('time-past');
     }
   }
 
   $('#timemachine').click(e => {
     if ($('#timemachine').hasClass('time-dimmed')) return;
     $('#timemachine').addClass('time-dimmed');
-    if ($('#timemachine').hasClass('time-past')) {
+    if ($('#timemachinesp').hasClass('time-past')) {
       timeTravelTo('f' + currentPid.slice(1));
     } else {
       timeTravelTo('p' + currentPid.slice(1));
