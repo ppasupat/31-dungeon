@@ -103,10 +103,10 @@
   width: 229px; height: 182px;
 }
 .time-future {
-  background-position: -2px -164px;
+  background-position: -2px -2px;
   width: 360px; height: 160px;
 }
 .time-past {
-  background-position: -2px -2px;
+  background-position: -2px -164px;
   width: 360px; height: 160px;
 }
