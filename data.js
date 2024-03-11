@@ -52,11 +52,11 @@ const [MAP_DATA, NPC_DATA] = function () {
       switch (op) {
         case 'enter':
           return R(0, true, true, [
-            'สวัสดี ข้าคือช่างก่อสร้างแห่งปราสาทหลังนี้',
+            'สวัสดี!<br>ข้าคือ<b>ช่างก่อสร้าง</b><br>แห่งปราสาทหลังนี้',
           ]);
         case 'action':
           return R(0, true, true, [
-            'ขอโทษด้วย ตอนนี้เลื่อยข้าเสีย ตัดไม้ไม่ได้',
+            'ขอโทษด้วย<br>ตอนนี้เลื่อยข้าเสีย<br>ตัดไม้ไม่ได้',
           ]);
         case 'sword':
           flags.swordGiven = 1;
@@ -66,7 +66,7 @@ const [MAP_DATA, NPC_DATA] = function () {
             'bridgeFrame', 'bridge',
           ].map(utils.refreshNpcOnMap);
           return R(1, false, false, [
-            'โอ้! ดาบนี้ตัดไม้ได้ดีจริง ๆ เดี๋ยวข้าเริ่มงานเลยแล้วกัน',
+            'โอ้!<br>ดาบนี้ตัดไม้ได้ดีจริง ๆ<br><br>ข้าเริ่มงานเลยแล้วกัน',
           ]);
       }
     },
@@ -90,7 +90,7 @@ const [MAP_DATA, NPC_DATA] = function () {
       switch (op) {
         case 'enter':
           return R(0, true, false, [
-            '<b>ช่วยด้วย!</b><br>จอมมารมันกลับมาอีกแล้ว',
+            '<b>ช่วยด้วย!</b><br><br>จอมมารมันกลับมา<br>อีกแล้ว',
           ]);
         case 'action':
           flags.tutorialDone = 1;
@@ -100,7 +100,7 @@ const [MAP_DATA, NPC_DATA] = function () {
           utils.refreshNpcOnMap('plotFuture');
           utils.showArrows();
           return R(1, false, false, [
-            '30 บาทครั้งที่แล้วยังไม่ได้คืนเลยนะยะ<br><b>ไม่ให้ย่ะ!</b>',
+            '30 บาทครั้งที่แล้ว<br>ยังไม่ได้คืนเลยนะยะ<br><br><b>ไม่ให้ย่ะ!</b>',
           ]);
       }
     },
@@ -153,7 +153,7 @@ const [MAP_DATA, NPC_DATA] = function () {
           flags.timeMachineTaken = 1;
           utils.enableTimeMachine();
           return R(0, false, false, [
-            '...<br>(คุณได้รับ<b>เครื่องย้อนเวลา</b>)',
+            '...<br><br><i>(คุณได้รับ<br><b>เครื่องย้อนเวลา</b>)</i>',
           ]);
       }
     },

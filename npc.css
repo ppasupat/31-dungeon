@@ -14,8 +14,8 @@
 }
 
 .map-dwarfIdle {
-  top: 80px;
-  left: 100px;
+  top: 180px;
+  left: 210px;
 }
 .map-dwarfIdle > .msp {
   transform: scale(0.5);
@@ -31,7 +31,7 @@
 
 .map-dwarfWorking {
   top: 80px;
-  left: 720px;
+  left: 610px;
   display: none;
 }
 .map-dwarfWorking > .msp {
@@ -43,30 +43,33 @@
   left: 830px;
 }
 .map-timeTravelerFirst > .msp {
-  transform: scale(0.5);
+  transform: scale(0.55);
+}
+.map-timeTravelerFirst > #exclaim {
+  left: -60px;
 }
 
 .map-bridgeFrame {
-  top: 250px;
-  left: 700px;
+  top: 155px;
+  left: 590px;
   display: none;
 }
 .map-bridgeFrame > .msp {
-  transform: scale(0.8);
+  transform: scale(1.0);
 }
 
 .map-bridge {
-  top: 250px;
-  left: 700px;
+  top: 255px;
+  left: 590px;
   display: none;
 }
 .map-bridge > .msp {
-  transform: scale(0.8);
+  transform: scale(1.0);
 }
 
 .map-aristocrat {
-  top: 900px;
-  left: 100px;
+  top: 880px;
+  left: 150px;
 }
 .map-aristocrat > .msp {
   transform: scale(0.7);
@@ -74,7 +77,7 @@
 
 .map-chest {
   top: 1100px;
-  left: 280px;
+  left: 190px;
 }
 .map-chest > .msp {
   transform: scale(1.0);
@@ -83,25 +86,24 @@
 .map-trash2 { top: 950px; left: 190px; }
 .map-trash3 { top: 1040px; left: 50px; }
 .map-trash4 { top: 840px; left: 330px; }
-.map-trash5 { top: 1020px; left: 360px; }
+.map-trash5 { top: 1020px; left: 350px; }
 .map-trash > .msp {
   transform: scale(2.5);
 }
 
-.map-plotPast {
-  top: 1330px;
-  left: 710px;
+.map-plotPast, .map-plotFuture {
+  top: 1280px;
+  left: 840px;
 }
-.map-plotPast > .msp {
-  transform: scale(0.5);
+.map-plotPast > .msp, .map-plotFuture > .msp {
+  transform: scale(0.7);
 }
-
-.map-plotFuture {
-  top: 1330px;
-  left: 710px;
+.map-plotPast > #exclaim, .map-plotFuture > #exclaim {
+  top: 70px;
 }
-.map-plotFuture > .msp {
-  transform: scale(0.5);
+.map-plotFuture.map-plot-2 > #exclaim {
+  top: 10px;
+  left: -70px;
 }
 
 .map-sorcerer {
@@ -109,22 +111,14 @@
   left: 100px;
 }
 .map-sorcerer > .msp {
-  transform: scale(0.5);
-}
-
-.map-throne {
-  top: 1750px;
-  left: 680px;
-}
-.map-throne > .msp {
   transform: scale(0.7);
 }
 
-.map-boss {
-  top: 1750px;
-  left: 680px;
+.map-throne, .map-boss {
+  top: 1700px;
+  left: 685px;
 }
-.map-boss > .msp {
+.map-throne > .msp, .map-boss > .msp {
   transform: scale(0.7);
 }
 
