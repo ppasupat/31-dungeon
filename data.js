@@ -209,7 +209,7 @@ const [MAP_DATA, NPC_DATA] = function () {
           ]);
         case 'action':
           return R(0, true, false, [
-            'ฉันไม่ให้สมบัติเธอง่าย ๆ หรอก!',
+            'ฉันไม่ให้สมบัติเธอ<br>ง่าย ๆ หรอก!',
           ]);
       }
     },
@@ -626,7 +626,8 @@ const [MAP_DATA, NPC_DATA] = function () {
     {q: 'อนาคตฉันเป็นงัย?', a: '... ปีหน้า เธอจะอายุมากขึ้น 1 ปี ...'},
     {q: 'หวยงวดหน้าออกอะไร?', a: '... จำได้แต่ว่าเป็นเลข 6 หลัก ...'},
     {q: 'ฉันจะได้แต่งงานไหม?', a: '... อืม คงได้แต่งงานวิจัยอีก ...'},
-    {q: 'มีอะไรจะบอกอีกไหม?', a: '... สุขสันต์วันเกิดนะ!'},
+    {q: 'มีอะไรจะบอกอีกไหม?', a: '... สุขสันต์วันเกิดนะ!', changeMood: true},
+    {q: 'วันเกิดออยผ่านไปแล้ว', a: 'ขอโทษที ไอซ์อู้ เลยทำไม่ทัน :('},
   ];
 
   npc_data.timeTravelerCongrats = {
@@ -644,9 +645,11 @@ const [MAP_DATA, NPC_DATA] = function () {
             '<i>' + congratsTexts[congratsState].q + '</i><br>',
             congratsTexts[congratsState].a,
           ];
+          if (congratsTexts[congratsState].changeMood) {
+            congratsMood = 2;
+          }
           congratsState += 1;
           if (congratsState === congratsTexts.length) {
-            congratsMood = 2;
             congratsState = 0;
           }
           utils.changeActionText(congratsTexts[congratsState].q);

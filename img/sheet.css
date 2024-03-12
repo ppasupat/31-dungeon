@@ -1,112 +1,112 @@
 .npc-aristocrat-0, .map-aristocrat > .msp {
-  background-position: -470px -324px;
+  background-position: -731px -808px;
   width: 150px; height: 312px;
 }
 .npc-boss-0, .map-boss > .msp {
-  background-position: -2px -678px;
+  background-position: -669px -164px;
   width: 210px; height: 320px;
 }
 .npc-boss-1, .map-boss.map-boss-1 > .msp {
-  background-position: -214px -678px;
+  background-position: -307px -326px;
   width: 210px; height: 320px;
 }
 .npc-boss-2, .map-boss.map-boss-2 > .msp {
-  background-position: -258px -326px;
+  background-position: -2px -453px;
   width: 210px; height: 320px;
 }
 .npc-bridge-0, .map-bridge > .msp {
-  background-position: -2px -326px;
-  width: 254px; height: 350px;
+  background-position: -2px -2px;
+  width: 303px; height: 449px;
 }
 .npc-bridgeFrame-0, .map-bridgeFrame > .msp {
-  background-position: -966px -624px;
-  width: 303px; height: 148px;
+  background-position: -669px -2px;
+  width: 303px; height: 147px;
 }
 .npc-chest-0, .map-chest > .msp {
-  background-position: -426px -970px;
+  background-position: -225px -1993px;
   width: 50px; height: 50px;
 }
 .npc-chest-1, .map-chest.map-chest-1 > .msp {
-  background-position: -1681px -288px;
+  background-position: -225px -1430px;
   width: 212px; height: 214px;
 }
 .npc-dwarf-0, .map-dwarf > .msp {
-  background-position: -1446px -2px;
+  background-position: -542px -1420px;
   width: 216px; height: 284px;
 }
 .npc-dwarf-1, .map-dwarf.map-dwarf-1 > .msp {
-  background-position: -1664px -2px;
+  background-position: -760px -1700px;
   width: 216px; height: 284px;
 }
 .npc-fairy-0, .map-fairy > .msp {
-  background-position: -1271px -598px;
+  background-position: -765px -1122px;
   width: 235px; height: 287px;
 }
 .npc-fairy-1, .map-fairy.map-fairy-1 > .msp {
-  background-position: -1444px -300px;
+  background-position: -765px -1411px;
   width: 235px; height: 287px;
 }
 .npc-plot-0, .map-plot > .msp {
-  background-position: -622px -315px;
+  background-position: -2px -775px;
   width: 210px; height: 311px;
 }
 .npc-plot-1, .map-plot.map-plot-1 > .msp {
-  background-position: -788px -2px;
+  background-position: -426px -808px;
   width: 210px; height: 311px;
 }
 .npc-plot-2, .map-plot.map-plot-2 > .msp {
-  background-position: -576px -2px;
+  background-position: -214px -648px;
   width: 210px; height: 311px;
 }
 .npc-sorcerer-0, .map-sorcerer > .msp {
-  background-position: -998px -315px;
+  background-position: -2px -1397px;
   width: 221px; height: 296px;
 }
 .npc-sorcerer-1, .map-sorcerer.map-sorcerer-1 > .msp {
-  background-position: -1000px -2px;
+  background-position: -2px -1695px;
   width: 221px; height: 296px;
 }
 .npc-sorcerer-2, .map-sorcerer.map-sorcerer-2 > .msp {
-  background-position: -1221px -300px;
+  background-position: -225px -1695px;
   width: 221px; height: 296px;
 }
 .npc-sorcerer-3, .map-sorcerer.map-sorcerer-3 > .msp {
-  background-position: -1223px -2px;
+  background-position: -542px -1122px;
   width: 221px; height: 296px;
 }
 .npc-throne-0, .map-throne > .msp {
-  background-position: -364px -2px;
+  background-position: -519px -486px;
   width: 210px; height: 320px;
 }
 .npc-throne-1, .map-throne.map-throne-1 > .msp {
-  background-position: -426px -648px;
+  background-position: -731px -486px;
   width: 210px; height: 320px;
 }
 .npc-timeTraveler-0, .map-timeTraveler > .msp {
-  background-position: -638px -628px;
+  background-position: -214px -961px;
   width: 162px; height: 307px;
 }
 .npc-timeTraveler-1, .map-timeTraveler.map-timeTraveler-1 > .msp {
-  background-position: -802px -628px;
+  background-position: -2px -1088px;
   width: 162px; height: 307px;
 }
 .npc-timeTraveler-2, .map-timeTraveler.map-timeTraveler-2 > .msp {
-  background-position: -834px -315px;
+  background-position: -378px -1121px;
   width: 162px; height: 307px;
 }
 .npc-trash-0, .map-trash > .msp {
-  background-position: -478px -970px;
+  background-position: -277px -1993px;
   width: 50px; height: 50px;
 }
 .npc-trash-1, .map-trash.map-trash-1 > .msp {
-  background-position: -966px -774px;
+  background-position: -448px -1706px;
   width: 229px; height: 182px;
 }
 .time-future {
-  background-position: -2px -2px;
+  background-position: -307px -2px;
   width: 360px; height: 160px;
 }
 .time-past {
-  background-position: -2px -164px;
+  background-position: -307px -164px;
   width: 360px; height: 160px;
 }

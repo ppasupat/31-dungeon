@@ -49,21 +49,12 @@
   left: -60px;
 }
 
-.map-bridgeFrame {
+.map-bridgeFrame, .map-bridge {
   top: 155px;
   left: 590px;
   display: none;
 }
-.map-bridgeFrame > .msp {
-  transform: scale(1.0);
-}
-
-.map-bridge {
-  top: 255px;
-  left: 590px;
-  display: none;
-}
-.map-bridge > .msp {
+.map-bridgeFrame > .msp, .map-bridge > .msp {
   transform: scale(1.0);
 }
 
