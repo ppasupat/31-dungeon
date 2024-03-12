@@ -47,15 +47,15 @@
   width: 235px; height: 287px;
 }
 .npc-plot-0, .map-plot > .msp {
-  background-position: -576px -2px;
-  width: 210px; height: 311px;
-}
-.npc-plot-1, .map-plot.map-plot-1 > .msp {
   background-position: -622px -315px;
   width: 210px; height: 311px;
 }
-.npc-plot-2, .map-plot.map-plot-2 > .msp {
+.npc-plot-1, .map-plot.map-plot-1 > .msp {
   background-position: -788px -2px;
+  width: 210px; height: 311px;
+}
+.npc-plot-2, .map-plot.map-plot-2 > .msp {
+  background-position: -576px -2px;
   width: 210px; height: 311px;
 }
 .npc-sorcerer-0, .map-sorcerer > .msp {
