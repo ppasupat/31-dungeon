@@ -85,7 +85,6 @@ const [MAP_DATA, NPC_DATA] = function () {
     name: 'นางฟ้า',
     actionText: 'ขอตังหน่อย',
     itemText: GIVE,
-    mapStates: {'tutorialDone': 'gone'},
     content: function (op, flags, utils) {
       switch (op) {
         case 'enter':
@@ -97,7 +96,6 @@ const [MAP_DATA, NPC_DATA] = function () {
           utils.refreshNpcOnMap('fairy');
           // Need to set up non-zero flags here.
           flags.seedlingUntouched = 1;
-          utils.refreshNpcOnMap('plotFuture');
           utils.showArrows();
           return R(1, false, false, [
             '30 บาทครั้งที่แล้ว<br>ยังไม่ได้คืนเลยนะยะ<br><br><b>ไม่ให้ย่ะ!</b>',
@@ -148,7 +146,13 @@ const [MAP_DATA, NPC_DATA] = function () {
     content: function (op, flags, utils) {
       switch (op) {
         case 'enter':
-          return R(0, !flags.timeMachineTaken, false, ['...']);
+          if (flags.timeMachineTaken) {
+            return R(0, false, false, [
+              '...<br><br><i>(คุณได้รับ<br><b>เครื่องย้อนเวลา</b>)</i>',
+            ]);
+          } else {
+            return R(0, !flags.timeMachineTaken, false, ['...']);
+          }
         case 'action':
           flags.timeMachineTaken = 1;
           utils.enableTimeMachine();
@@ -442,14 +446,20 @@ const [MAP_DATA, NPC_DATA] = function () {
     name: 'จอมเวทย์',
     actionText: 'เวทศักดิ์สิทธิ์ใช้งัย?',
     itemText: GIVE,
-    mapStates: {'lemonTeaMade': 'map-sorcerer-3'},
+    mapStates: {
+      'onlyTeaGiven': 'map-sorcerer-1',
+      'onlyLemonGiven': 'map-sorcerer-2',
+      'lemonTeaMade': 'map-sorcerer-3',
+    },
     content: function (op, flags, utils) {
       let mood = function () {
-        return 2 * (flags.lemonGiven ? 1 : 0) + (flags.teaGiven ? 1 : 0)
+        return flags.lemonTeaMade ? 3 :
+          flags.onlyLemonGiven ? 2 :
+          flags.onlyTeaGiven ? 1 : 0;
       };
       switch (op) {
         case 'enter':
-          if (flags.teaGiven && flags.lemonGiven) {
+          if (flags.lemonTeaMade) {
             return R(3, true, false, [
               'ขอบใจเจ้าอีกครั้ง',
             ]);
@@ -465,12 +475,14 @@ const [MAP_DATA, NPC_DATA] = function () {
           ]);
         case 'lemon':
           utils.removeItem('lemon');
-          flags.lemonGiven = 1;
-          if (!flags.teaGiven) {
+          if (!flags.onlyTeaGiven) {
+            flags.onlyLemonGiven = 1;
+            utils.refreshNpcOnMap('sorcerer');
             return R(2, false, true, [
-              '<b>มะนาว</b>รึ?<br>ก็ดีนะ แต่กินมะนาวเฉย ๆ มันเปรี้ยวเกิน',
+              '<b>มะนาว</b>รึ? ก็ดีนะ<br>แต่กินมะนาวเฉย ๆ<br>มันเปรี้ยวเกิน',
             ]);
           } else {
+            flags.onlyTeaGiven = 0;
             flags.lemonTeaMade = 1;
             utils.refreshNpcOnMap('sorcerer');
             utils.addItem('spell');
@@ -480,12 +492,14 @@ const [MAP_DATA, NPC_DATA] = function () {
           }
         case 'tea':
           utils.removeItem('tea');
-          flags.teaGiven = 1;
-          if (!flags.lemonGiven) {
+          if (!flags.onlyLemonGiven) {
+            flags.onlyTeaGiven = 1;
+            utils.refreshNpcOnMap('sorcerer');
             return R(1, false, true, [
-              '<b>ชา</b>รึ?<br>ก็ดีนะ แต่กินชาเฉย ๆ มันขมเกิน',
+              '<b>ชา</b>รึ? ก็ดีนะ<br>แต่กินชาเฉย ๆ<br>มันขมเกิน',
             ]);
           } else {
+            flags.onlyLemonGiven = 0;
             flags.lemonTeaMade = 1;
             utils.refreshNpcOnMap('sorcerer');
             utils.addItem('spell');

@@ -98,11 +98,11 @@
 }
 
 .map-sorcerer {
-  top: 1700px;
-  left: 100px;
+  top: 1680px;
+  left: 140px;
 }
 .map-sorcerer > .msp {
-  transform: scale(0.7);
+  transform: scale(0.65);
 }
 
 .map-throne, .map-boss {

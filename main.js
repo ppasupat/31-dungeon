@@ -178,10 +178,14 @@ $(function () {
       let corrds = getMapCoords(npc.loc);
       let npcDiv = $('<div class=map-npc>').attr({
         'data-nid': npc.nid,
-      }).addClass('map-' + npc.nid).appendTo(pidToMapIdName(npc.loc));
+      }).addClass('map-' + npc.nid);
       npcDiv.append($('<div class=msp>'));
       if (npc.nidAlias) npcDiv.addClass('map-' + npc.nidAlias);
-      if (npc.cosmetic) npcDiv.addClass('cosmetic');
+      if (npc.cosmetic) {
+        npcDiv.addClass('cosmetic').prependTo(pidToMapIdName(npc.loc));
+      } else {
+        npcDiv.appendTo(pidToMapIdName(npc.loc));
+      }
       UTILS.refreshNpcOnMap(npc.nid);
     });
     exclaimDiv = $('<div id=exclaim>').append($('<div id=exclaim-fg>'));
