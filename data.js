@@ -96,6 +96,7 @@ const [MAP_DATA, NPC_DATA] = function () {
           utils.refreshNpcOnMap('fairy');
           // Need to set up non-zero flags here.
           flags.seedlingUntouched = 1;
+          utils.refreshNpcOnMap('plotFuture');
           utils.showArrows();
           return R(1, false, false, [
             '30 บาทครั้งที่แล้ว<br>ยังไม่ได้คืนเลยนะยะ<br><br><b>ไม่ให้ย่ะ!</b>',
