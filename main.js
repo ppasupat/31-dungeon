@@ -363,7 +363,7 @@ $(function () {
     if (savedData !== undefined) {
       loadGame(savedData);
     } else {
-      warpTo('f0');
+      warpTo('f1');
     }
     UTILS.showArrows();
     $('#scene-cover').addClass('hidden');

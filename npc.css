@@ -13,34 +13,25 @@
   transform-origin: top left;
 }
 
-.map-dwarfIdle {
-  top: 180px;
-  left: 210px;
-}
-.map-dwarfIdle > .msp {
-  transform: scale(0.5);
-}
-
 .map-fairy {
-  top: 130px;
-  left: 270px;
+  top: 100px;
+  left: 700px;
 }
 .map-fairy > .msp {
   transform: scale(0.5);
 }
 
-.map-dwarfWorking {
+.map-dwarf {
   top: 80px;
   left: 610px;
-  display: none;
 }
-.map-dwarfWorking > .msp {
+.map-dwarf > .msp {
   transform: scale(0.5);
 }
 
 .map-timeTravelerFirst {
-  top: 80px;
-  left: 830px;
+  top: 130px;
+  left: 270px;
 }
 .map-timeTravelerFirst > .msp {
   transform: scale(0.55);
@@ -52,10 +43,12 @@
 .map-bridgeFrame, .map-bridge {
   top: 155px;
   left: 590px;
-  display: none;
 }
 .map-bridgeFrame > .msp, .map-bridge > .msp {
   transform: scale(1.0);
+}
+.map-bridge {
+  display: none;
 }
 
 .map-aristocrat {
